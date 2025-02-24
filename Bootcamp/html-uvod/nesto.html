@@ -45,6 +45,45 @@
         color: red;
       }
 
+      h1, h2 {
+        color: blueviolet;
+      }
+
+      .box > p {
+        color: firebrick;
+      }
+
+      .box li {
+        color: blue;
+      }
+
+      li.done {
+        color: seagreen;
+      }
+
+      ul p.done {
+        font-size: 12px;
+      }
+
+      div {
+        position: static;
+      }
+
+
+      /* Standardni stilovi */
+      body {
+        background-color: white;
+      }
+
+      /* Ako je ekran manji od 600px */
+      @media (max-width: 600px) {
+        body {
+          background-color: lightblue;
+        }
+      }
+
+
+
 
 
 
@@ -100,5 +139,94 @@
       <h4> to <h6> = Further sublevels.
 
 </head>
+
+<script>
+
+  // alert - ime funkcije
+  // () - zagrade
+  // "Hello, World!" - argument funkcije
+  // ; - završetak naredbe
+  alert("Hello, World!");
+
+  var myName = "Dino";
+
+  var x = "Dino"; //lose
+  var userName = "Dino"; //dobro
+
+
+  //dobro
+  var userAge = 25;
+  var isLoggedIn = true;
+
+  //lose
+  var x = 25;
+  var y = true;
+
+
+  var name = "Angela";
+console.log(name.slice(0, 3)); // "Ang"
+console.log(name.slice(1, 5)); // "ngel"
+console.log(name.slice(0, 1)); // "A"
+
+var name = "Dino";
+console.log(name.slice(0, 3)); // "Din"
+console.log(name.slice(1, 4)); // "ino"
+console.log(name.slice(0, 1)); // "D"
+
+console.log(document); //  Ovo vraća ceo HTML fajl kao DOM objekat
+
+
+var cost = (3 + 5) * 2;
+console.log(cost); 
+
+var score = Math.floor(Math.random() * 100) + 1;
+
+if (score > 70) {
+    alert("Vaš ljubavni rezultat je " + score + "%. Vi ste savršen par! ❤️");
+} else if (score > 30 && loveScore <= 70) {
+    alert("Vaš ljubavni rezultat je " + score + "%. Postoji potencijal! 😍");
+} else {
+    alert("Vaš ljubavni rezultat je " + score + "%. Možda je bolje da ostanete prijatelji. 😅");
+}
+
+var gosti = ["Dino", "Marko", "Ivana", "Petar", "Maja", "Luka"];
+
+
+
+
+  funkcija(argument1, argument2);
+
+</script>
+    
   
-  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    
+    <script>
+        alert("Hello!");
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <script src="app.js"></script>
+</body>
+</html>
+
+
+<head>
+  <script src="index.js"></script> //POGRESNO
+</head>
+
+
