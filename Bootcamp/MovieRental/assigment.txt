@@ -1,0 +1,90 @@
+
+### Minimalni zahtjevi za bazu podataka
+
+Tablica movies (filmovi)
+Opis: Pohranjuje osnovne informacije o filmovima.
+
+Primjeri stupaca:
+
+id (PRIMARY KEY, npr. SERIAL ili INT AUTO_INCREMENT)
+title (naziv filma)
+genre (žanr filma)
+release_year (godina izlaska)
+rating (ocjena, npr. INT ili DECIMAL)
+Tablica customers (kupci/korisnici)
+Opis: Pohranjuje podatke o korisnicima koji iznajmljuju filmove.
+
+Primjeri stupaca:
+
+id (PRIMARY KEY)
+first_name (ime)
+last_name (prezime)
+email (jedinstveni email, UNIQUE)
+membership_type (npr. BASIC, PREMIUM, FAMILY)
+Tablica rentals (iznajmljivanje)
+Opis: Prati tko je i kada iznajmio određeni film, te kada ga je vratio.
+
+Primjeri stupaca:
+
+id (PRIMARY KEY)
+movie_id (FOREIGN KEY koji referencira movies(id))
+customer_id (FOREIGN KEY koji referencira customers(id))
+rental_date (datum početka najma)
+return_date (datum povratka filma, može biti NULL dok film nije vraćen)
+(Opcionalno) Tablica staff (osoblje)
+Opis: Pohranjuje podatke o zaposlenicima videokluba (ako je potrebno).
+
+Primjeri stupaca:
+
+id (PRIMARY KEY)
+name (ime djelatnika)
+role (npr. “administrator”, “sales”)
+
+
+
+### Zadaci za vježbu (CRUD operacije)
+CREATE (Dodavanje)
+Napravite formu ili API endpoint za dodavanje novih filmova u tablicu movies.
+Omogućite dodavanje novih korisnika u tablicu customers.
+Kreirajte unos nove posudbe (rental) u tablicu rentals.
+
+READ (Čitanje)
+Ispišite sve filmove iz tablice movies na frontend (npr. u obliku tablice).
+Napravite stranicu ili endpoint za pregled pojedinačnog filma (po id).
+Prikažite sve posudbe (rentals) s informacijama o filmovima i korisnicima (koristeći JOIN).
+
+UPDATE (Ažuriranje)
+Omogućite promjenu informacija o filmu (npr. promjena naziva ili ocjene).
+Ažurirajte podatke o korisniku (npr. promjena emaila).
+Omogućite promjenu datuma povratka filma (npr. kad korisnik vrati film).
+
+DELETE (Brisanje)
+Dodajte opciju za brisanje filma iz baze (pazite na vezane zapise u rentals).
+Omogućite brisanje korisnika (npr. ako više nije aktivan).
+Omogućite brisanje zapisa o posudbi (rental) nakon što je obrađena (opcionalno).
+
+
+
+### Savjeti i smjernice
+Relacije:
+Pazite da koristite PRIMARY KEY i FOREIGN KEY odnose kako biste održali referencijalni integritet (npr. ne možete unijeti rental s movie_id koji ne postoji u tablici movies).
+
+Validacija:
+Prije umetanja ili ažuriranja podataka, provjerite jesu li polja popunjena (npr. title filma, email korisnika).
+
+Testiranje:
+Provjerite sve CRUD operacije za svaku tablicu (posebno obratite pažnju na DELETE ako postoje veze u drugim tablicama).
+
+Dodatni izazov:
+Dodajte još polja ili tablica (npr. categories, reviews za filmove) kako biste proširili funkcionalnost i praksu.
+
+
+
+
+
+### Uspješno rješenje:
+
+Ima ispravno definiranu bazu (barem 3 tablice: movies, customers, rentals).
+Implementira sve CRUD operacije (Create, Read, Update, Delete).
+Osigurava referencijalni integritet (npr. rentals mora imati ispravan movie_id i customer_id).
+Pruža frontend sučelje (ili barem API) za testiranje unosa i prikaza podataka.
