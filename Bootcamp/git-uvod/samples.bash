@@ -33,4 +33,4 @@ git pull origin main
 tmp/* 
 
 # Izuzetak (ne ignorira important.log iako *.log jest).
-!important.log 
+!important.log
