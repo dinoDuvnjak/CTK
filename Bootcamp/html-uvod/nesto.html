@@ -1,232 +1,132 @@
-<!DOCTYPE html> <!-- Deklaracija tipa dokumenta. Ovim govorimo pretraživaču da koristimo HTML5. -->
+<!DOCTYPE html>
+<!-- Deklaracija tipa dokumenta. Ovim govorimo pretraživaču da koristimo HTML5. -->
 
-<html lang="hr"> <!--Korenski (root) element HTML-a
+<html lang="hr">
+  <!--Korenski (root) element HTML-a
                     Označava da je sadržaj na hrvatskom jeziku. 
                     Ovo pomaže pretraživačima i čitačima ekrana da ispravno interpretiraju tekst -->
 
-<head> <!-- Ova sekcija nije vidljiva korisniku, ali sadrži važne informacije o stranici. -->
-    <meta charset="UTF-8"> <!-- Omogućava prikaz specijalnih znakova i emoji-ja -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Širina viewporta (vidljivog dela stranice) biće jednaka širini ekrana uređaja. 
+  <head>
+    <!-- Ova sekcija nije vidljiva korisniku, ali sadrži važne informacije o stranici. -->
+    <meta charset="UTF-8" />
+    <!-- Omogućava prikaz specijalnih znakova i emoji-ja -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Širina viewporta (vidljivog dela stranice) biće jednaka širini ekrana uređaja. 
                                                                             Postavlja početni zoom na 100% (sprečava automatsko zumiranje)-->
-    <title>Moj sajt</title> <!--  Tekst koji se prikazuje u kartici pretraživača -->
-</head>
-<body> <!-- Sve što korisnik vidi na sajtu nalazi se u body -->
+    <title>Moj sajt</title>
+    <!--  Tekst koji se prikazuje u kartici pretraživača -->
+  </head>
+  <body>
+    <!-- Sve što korisnik vidi na sajtu nalazi se u body -->
     <h1>Dobrodošli!</h1>
     <p>Ovo je moj prvi HTML dokument.</p>
-</body>
-</html>
-
-
-<h1 style="color: blue;">Ovo je plavi naslov</h1>
-
-
-<head>
-    <style>
-
-    * {
-        font-family: Arial, sans-serif;
-      }
-
-
-
-      h1 {
-        color: red;
-      }
-
-      #main-title {
-        color: green;
-      }
-
-      input[type="text"] {
-        background-color: yellow;
-      }
-
-      .red-text {
-        color: red;
-      }
-
-      h1, h2 {
-        color: blueviolet;
-      }
-
-      .box > p {
-        color: firebrick;
-      }
-
-      .box li {
-        color: blue;
-      }
-
-      li.done {
-        color: seagreen;
-      }
-
-      ul p.done {
-        font-size: 12px;
-      }
-
-      div {
-        position: static;
-      }
-
-
-      /* Standardni stilovi */
-      body {
-        background-color: white;
-      }
-
-      /* Ako je ekran manji od 600px */
-      @media (max-width: 600px) {
-        body {
-          background-color: lightblue;
-        }
-      }
-
-
-
-
-
-
-
-    </style>
-</head>
-
-<head>
-    <link rel="stylesheet" href="styles.css">
-
-
-
-    <h1 id="main-title">Glavni naslov</h1>
-
-
-    <input type="text" placeholder="Unesi ime">
-    <input type="password" placeholder="Unesi lozinku">
-
-    <h2 class="red-text">Ovo je crveni naslov</h2>
-    <p class="red-text">Ovo je crveni paragraf</p>
-
-
-    <element attribute="">Content</element>
-
-    
-    <h1>Main title</h1>
-    <h3>Section 1</h3>
-    <h2>Subsection 1</h2>
-    <h4>Diagram 1</h4>
-
-    <h1>Main title</h1>
-    <h2>Section title</h2>
-    <h3>Subsection</h3>
-    <h4>Diagram 1</h4>
-
-
-    <a href="about.html">About as</a>
-
-
-
 
     <div class="container">
       <h1>Naslov</h1>
       <p>Ovo je paragraf unutar div-a.</p>
     </div>
-    
+  </body>
+</html>
 
-
-
-      <h1> = Main title
-      <h2> = Section title
-      <h3> = Subsection
-      <h4> to <h6> = Further sublevels.
-
-</head>
+<h1 style="color: blue">Ovo je plavi naslov</h1>
 
 <script>
-
-  // alert - ime funkcije
-  // () - zagrade
-  // "Hello, World!" - argument funkcije
-  // ; - završetak naredbe
-  alert("Hello, World!");
-
-  var myName = "Dino";
-
-  var x = "Dino"; //lose
-  var userName = "Dino"; //dobro
-
-
-  //dobro
-  var userAge = 25;
-  var isLoggedIn = true;
-
-  //lose
-  var x = 25;
-  var y = true;
-
-
-  var name = "Angela";
-console.log(name.slice(0, 3)); // "Ang"
-console.log(name.slice(1, 5)); // "ngel"
-console.log(name.slice(0, 1)); // "A"
-
-var name = "Dino";
-console.log(name.slice(0, 3)); // "Din"
-console.log(name.slice(1, 4)); // "ino"
-console.log(name.slice(0, 1)); // "D"
-
-console.log(document); //  Ovo vraća ceo HTML fajl kao DOM objekat
-
-
-var cost = (3 + 5) * 2;
-console.log(cost); 
-
-var score = Math.floor(Math.random() * 100) + 1;
-
-if (score > 70) {
-    alert("Vaš ljubavni rezultat je " + score + "%. Vi ste savršen par! ❤️");
-} else if (score > 30 && loveScore <= 70) {
-    alert("Vaš ljubavni rezultat je " + score + "%. Postoji potencijal! 😍");
-} else {
-    alert("Vaš ljubavni rezultat je " + score + "%. Možda je bolje da ostanete prijatelji. 😅");
-}
-
-var gosti = ["Dino", "Marko", "Ivana", "Petar", "Maja", "Luka"];
-
-
-
-
-  funkcija(argument1, argument2);
+  
+  document.body.firstElementChild; // Selects the first h1 element in the body
+  document.body.firstElementChild.innerHTML = "Good Bye!"; // Changes the text of the first h1 element in the body
 
 </script>
-    
-  
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Website</title>
-</head>
-<body>
-    <h1>Hello</h1>
-    
-    <script>
-        alert("Hello!");
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Website</title>
-</head>
-<body>
-    <h1>Hello</h1>
-    <script src="app.js"></script>
-</body>
-</html>
-
 
 <head>
-  <script src="index.js"></script> //POGRESNO
+  <style>
+    h1 {
+      color: red;
+    }
+
+    li {
+      color: red; /* Prvo pravilo */
+    }
+
+    li {
+      color: blue; /* Ovo pravilo dolazi kasnije */
+    }
+
+    p {
+      color: blue; /* Najmanja specifičnost (element selektor) */
+    }
+
+    .moja-klasa {
+      color: red; /* Veća specifičnost od elementa */
+    }
+
+    [draggable] {
+      color: purple; /* Atribut selektor, veća specifičnost od klase */
+    }
+
+    #moj-id {
+      color: orange; /* Najveća specifičnost - ID selektor */
+    }
+
+    h1 {
+      color: red !important; /* Ovo pravilo uvek važi! */
+    }
+
+    h1 {
+      color: blue; /* Ovo pravilo se ignoriše */
+    }
+
+
+    li {
+    color: red; /* First rule */
+    }
+
+    li {
+        color: blue; /* This rule comes later */
+    }
+
+
+    p {
+    color: blue; /* Lowest specificity (element selector) */
+    }
+
+    .moja-klasa {
+        color: red; /* Higher specificity than element */
+    }
+
+    [draggable] {
+        color: purple; /* Attribute selector, higher specificity than class */
+    }
+
+    #moj-id {
+        color: orange; /* Highest specificity – ID selector */
+    }
+
+    h1 {
+      color: blue; /* External style (lowest priority) */
+    }
+
+    .red-title {
+        color: red; /* Class (stronger than element) */
+    }
+
+    #title {
+        color: purple; /* ID selector (stronger than class) */
+    }
+
+
+    h1 {
+    color: red !important; /* This rule always applies! */
+    }
+
+    h1 {
+        color: blue; /* This rule is ignored */
+    }
+
+
+
+  </style>
 </head>
 
-
+<head>
+  <link rel="stylesheet" href="styles.css" />
+</head>
