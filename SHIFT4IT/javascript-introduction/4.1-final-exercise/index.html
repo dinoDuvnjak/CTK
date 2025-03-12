@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduHence Classroom Management</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">EduHence</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#students">Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="#classes">Classes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#reports">Reports</a></li>
+            <li class="nav-item"><a class="nav-link" href="#settings">Settings</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+<div class="container mt-5">
+    <!-- Header -->
+    <header class="text-center mb-4">
+        <h1 class="display-4">EduHence Classroom Management</h1>
+    </header>
+
+    <!-- Form to Add a New Student -->
+    <section id="students" class="mb-5">
+        <h2>Add New Student</h2>
+        <form id="student-form" class="border p-4 rounded shadow-sm bg-light">
+            <div class="form-group">
+                <label for="student-name">Name:</label>
+                <input type="text" class="form-control" id="student-name" name="student-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="student-age">Age:</label>
+                <input type="number" class="form-control" id="student-age" name="student-age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="class">Class:</label>
+                <input type="text" class="form-control" id="class" name="class" required>
+            </div>
+
+            <div class="form-group">
+                <label for="parent-contact">Parent Contact:</label>
+                <input type="text" class="form-control" id="parent-contact" name="parent-contact" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Add Student</button>
+        </form>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <input type="text" id="search" class="form-control" placeholder="Search students by name...">
+    </div>
+
+    <!-- Table to Display Students -->
+    <section>
+        <h2>Student List</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Class</th>
+                        <th>Parent Contact</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="student-list">
+                    <!-- Example Data -->
+                    <tr>
+                        <td>Emily Johnson</td>
+                        <td>12</td>
+                        <td>6A</td>
+                        <td>+1234567890</td>
+                        <td><button class="btn btn-danger btn-sm delete-btn">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Michael Brown</td>
+                        <td>14</td>
+                        <td>8B</td>
+                        <td>+1234567891</td>
+                        <td><button class="btn btn-danger btn-sm delete-btn">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2024 EduHence. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS + Dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript Code -->
+<script>
+    // Add New Student
+    document.getElementById('student-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('student-name').value;
+        const age = document.getElementById('student-age').value;
+        const className = document.getElementById('class').value;
+        const parentContact = document.getElementById('parent-contact').value;
+
+        if (name && age && className && parentContact) {
+            const table = document.getElementById('student-list');
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${age}</td>
+                <td>${className}</td>
+                <td>${parentContact}</td>
+                <td><button class="btn btn-danger btn-sm delete-btn">Delete</button></td>
+            `;
+            attachDeleteHandlers();
+            this.reset();
+        } else {
+            alert("Please fill out all fields");
+        }
+    });
+
+    // Delete Student
+    function attachDeleteHandlers() {
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.parentElement.parentElement.remove();
+            });
+        });
+    }
+    attachDeleteHandlers();
+
+    // Filter Students
+    document.getElementById('search').addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#student-list tr');
+        rows.forEach(row => {
+            const name = row.cells[0].textContent.toLowerCase();
+            row.style.display = name.includes(filter) ? '' : 'none';
+        });
+    });
+</script>
+
+</body>
+</html>

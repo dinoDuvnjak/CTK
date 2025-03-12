@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Video Club CMS</title>
+    <title>EduHence Classroom Management</title>
 </head>
 <body>
     <!-- Header Section -->
     <header>
-        <h1>Video Club Management</h1>
+        <h1>EduHence Classroom Management</h1>
     </header>
 
     <!-- Navigation Section -->
     <nav>
         <ul>
             <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#movies">Movies</a></li>
-            <li><a href="#members">Members</a></li>
+            <li><a href="#students">Students</a></li>
+            <li><a href="#classes">Classes</a></li>
             <li><a href="#reports">Reports</a></li>
             <li><a href="#settings">Settings</a></li>
         </ul>
@@ -24,51 +24,51 @@
 
     <!-- Main Content Section -->
     <main>
-        <!-- Form to Add a New Movie -->
-        <section id="movies">
-            <h2>Add New Movie</h2>
+        <!-- Form to Add a New Student -->
+        <section id="students">
+            <h2>Add New Student</h2>
             <form>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required /><br>
+                <label for="student-name">Name:</label>
+                <input type="text" id="student-name" name="student-name" required /><br>
 
-                <label for="genre">Genre:</label>
-                <input type="text" id="genre" name="genre" required /><br>
+                <label for="student-age">Age:</label>
+                <input type="number" id="student-age" name="student-age" required /><br>
 
-                <label for="year">Release Year:</label>
-                <input type="number" id="year" name="year" required /><br>
+                <label for="class">Class:</label>
+                <input type="text" id="class" name="class" required /><br>
 
-                <label for="director">Director:</label>
-                <input type="text" id="director" name="director" required /><br>
+                <label for="parent-contact">Parent Contact:</label>
+                <input type="text" id="parent-contact" name="parent-contact" required /><br>
 
-                <button type="submit">Add Movie</button>
+                <button type="submit">Add Student</button>
             </form>
         </section>
 
-        <!-- Table to Display Movies -->
+        <!-- Table to Display Students -->
         <section>
-            <h2>Movie List</h2>
+            <h2>Student List</h2>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Genre</th>
-                        <th>Release Year</th>
-                        <th>Director</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Class</th>
+                        <th>Parent Contact</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Example Data -->
                     <tr>
-                        <td>The Godfather</td>
-                        <td>Crime</td>
-                        <td>1972</td>
-                        <td>Francis Ford Coppola</td>
+                        <td>Emily Johnson</td>
+                        <td>12</td>
+                        <td>6A</td>
+                        <td>+1234567890</td>
                     </tr>
                     <tr>
-                        <td>Inception</td>
-                        <td>Sci-Fi</td>
-                        <td>2010</td>
-                        <td>Christopher Nolan</td>
+                        <td>Michael Brown</td>
+                        <td>14</td>
+                        <td>8B</td>
+                        <td>+1234567891</td>
                     </tr>
                 </tbody>
             </table>
@@ -77,7 +77,7 @@
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Video Club CMS. All rights reserved.</p>
+        <p>&copy; 2024 EduHence. All rights reserved.</p>
     </footer>
 </body>
 </html>
