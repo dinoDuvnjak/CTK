@@ -1,0 +1,16 @@
+#add flaskr/__pycache__/
+#add flaskr/*.pyc
+#add flaskr/*.pyo
+#add flaskr/*.pyd
+#add flaskr/__pycache__/
+#add flaskr/*.pyc
+#add flaskr/*.pyo
+#add flaskr/*.pyd
+#add flaskr/__pycache__/
+
+# add all the lib , Scripts and include files in the virtual environment
+Bootcamp/flask/restApi/.venv/
+
+Bootcamp/flask/__pycache__/
+
+.venv/
