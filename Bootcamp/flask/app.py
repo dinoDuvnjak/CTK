@@ -1,5 +1,6 @@
 from flask import Flask, request
 from db import stores, items
+from flask import abort
 import uuid
 app = Flask(__name__)
 
@@ -14,8 +15,16 @@ def get_store(store_id):
         return stores[store_id]
     except KeyError:
         return {'message': 'Store not found'}, 404
-
-
+    
+@app.delete("/store/<string:store_id>")
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {"message": "Store deleted."}
+    except KeyError:
+        abort(404, message="Store not found.")
+    
+    
 # Create a store using a unique ID : expects name in the JSON payload
 @app.post('/store')
 def create_store():
@@ -65,6 +74,33 @@ def get_item(item_id):
         return items[item_id]
     except KeyError:
         return {'message': 'Item not found'}, 404
+    
+@app.put("/item/<string:item_id>")
+def update_item(item_id):
+    item_data = request.get_json()
+    # There's  more validation to do here!
+    # Like making sure price is a number, and also both items are optional
+    # Difficult to do with an if statement...
+    if "price" not in item_data or "name" not in item_data:
+        abort(
+            400,
+            message="Bad request. Ensure 'price', and 'name' are included in the JSON payload.",
+        )
+    try:
+        item = items[item_id]
+        # https://blog.teclado.com/python-dictionary-merge-update-operators/
+        item |= item_data
+        return item
+    except KeyError:
+        abort(404, message="Item not found.")    
+    
+@app.delete("/item/<string:item_id>")
+def delete_item(item_id):
+    try:
+        del items[item_id]
+        return {"message": "Item deleted."}
+    except KeyError:
+        abort(404, message="Item not found.")    
 
 
 
