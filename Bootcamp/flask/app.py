@@ -1,64 +1,70 @@
 from flask import Flask, request
+from db import stores, items
+import uuid
 app = Flask(__name__)
 
 
-stores = [
-    {
-        'name': 'Brodokomerc',   # ime trgovine
-        'items': [                       # lista artikala u trgovini       
-            {
-                'name': 'Stol',        # ime artikla
-                'price': 15.99            # cijena artikla
-            }
-        ]
-    }    
-]
-
 @app.get('/stores') # URL http://127.0.0.1:5000/stores
 def get_stores():
-    return {'stores': stores} # 'stores' je lista trgovina s podacima
+    return {'stores': list(stores.values())} # 'stores' je lista trgovina s podacima
+
+@app.get('/store/<string:store_id>')
+def get_store(store_id):
+    try:
+        return stores[store_id]
+    except KeyError:
+        return {'message': 'Store not found'}, 404
 
 
-
-
-@app.post('/store') # URL http://127.0.0.1:5000/store
+# Create a store using a unique ID : expects name in the JSON payload
+@app.post('/store')
 def create_store():
-    request_data = request.get_json() # JSON se pretvara u Python dictionary koristeći request.get_json()
+    request_data = request.get_json()  # Convert JSON payload to a Python dictionary
+    store_id = uuid.uuid4().hex         # Generate a unique ID for the store
     new_store = {
-        'name': request_data['name'], # ime trgovine
-        'items': []                   # prazna lista artikala
+        'store_id': store_id,
+        'name': request_data['name']
     }
-    stores.append(new_store) # dodaj novu trgovinu u listu trgovina
-    return new_store, 201 # vrati novu trgovinu i status 201 (Created)
+    stores[store_id] = new_store         # Save the new store in the stores dictionary
+    return new_store, 201                # Return the new store and status 201 (Created)
 
+# Create an item; expects store_id in the JSON payload
+@app.post('/item')
+def create_item():
+    request_data = request.get_json()  # Convert JSON payload to a Python dictionary
+    store_id = request_data.get('store_id')
+    if store_id not in stores:
+        return {'message': 'Store not found'}, 404
+    item_id = uuid.uuid4().hex          # Generate a unique ID for the item
+    new_item = {
+        'id': item_id,
+        'name': request_data['name'],
+        'price': request_data['price'],
+        'store_id': store_id            # Associate the item with the store
+    }
+    items[item_id] = new_item           # Save the new item in the items dictionary
+    return new_item, 201                # Return the new item and status 201 (Created)
 
-@app.post('/store/<string:name>/item') 
-def create_item(name): 
-    request_data = request.get_json() # JSON se pretvara u Python dictionary koristeći request.get_json()
-    for store in stores: # prolazi kroz sve trgovine
-        if store['name'] == name: # ako je ime trgovine jednako imenu trgovine u listi trgovina
-            new_item = {
-                'name': request_data['name'],
-                'price': request_data['price']
-            }
-            store['items'].append(new_item) # dodaj novi artikal u listu artikala trgovine
-            return new_item, 201 # vrati novi artikal i status 201 (Created)
-    return {'message': 'Store not found'}, 404 # ako trgovina nije pronađena, vrati poruku i status 404 (Not Found)
+# Get all items for a specific store using its unique ID
+# this needs to be done with inner join
+@app.get('/store/<string:store_id>/item')
+def get_store_items(store_id):
+    if store_id not in stores:
+        return {'message': 'Store not found'}, 404
+    # Filter items that belong to the given store_id
+    store_items = [item for item in items.values() if item['store_id'] == store_id]
+    return {'items': store_items}
 
+@app.get('/items')
+def get_items():
+    return list(items.values())
 
-@app.get('/store/<string:name>')
-def get_store(name): # funkcija koja vraća trgovinu s artiklima
-    for store in stores:
-        if store['name'] == name: # ako je ime trgovine jednako imenu trgovine u listi trgovina
-            return store # vrati trgovinu
-    return {'message': 'Store not found'}, 404 # ako trgovina nije pronađena, vrati poruku i status 404 (Not Found)
+@app.get('/item/<string:item_id>')
+def get_item(item_id):
+    try:
+        return items[item_id]
+    except KeyError:
+        return {'message': 'Item not found'}, 404
 
-@app.get('/store/<string:name>/item')
-def get_store_items(name): # funkcija koja vraća artikle trgovine
-    for store in stores:
-        print(store)
-        if store['name'] == name: # ako je ime trgovine jednako imenu trgovine u listi trgovina
-            return {'items': store['items']} # vrati artikle trgovine
-    return {'message': 'Store not found'}, 404 # ako trgovina nije pronađena, vrati poruku i status 404 (Not Found)
 
 
