@@ -12,7 +12,6 @@ class ItemModel(db.Model):
         db.Integer, db.ForeignKey("stores.id"), unique=False, nullable=False
     )
 
-    # ovo je relacija na StoreModel, M:1
     store = db.relationship("StoreModel", back_populates="items") 
+    tags = db.relationship("TagModel", back_populates="items", secondary="items_tags") # tags je relacija na TagModel
 
-    # tags = db.relationship("TagModel", back_populates="items", secondary="items_tags") # tags je relacija na TagModel
