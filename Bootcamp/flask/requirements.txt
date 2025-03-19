@@ -1,6 +1,6 @@
 flask
 flask-smorest
-Flask-SQLAlchemy
+Flask-SQLAlchemy # ORM
 python-dotenv
 flask-jwt-extended
-passlib # for password hashing
+passlib
