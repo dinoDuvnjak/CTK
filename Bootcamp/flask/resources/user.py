@@ -12,7 +12,7 @@ from passlib.hash import pbkdf2_sha256
 from db import db
 from models import UserModel
 from schemas import UserSchema
-#from blocklist import BLOCKLIST
+from blocklist import BLOCKLIST
 
 
 blp = Blueprint("Users", "users", description="Operations on users")
@@ -44,8 +44,8 @@ class UserLogin(MethodView):
         ).first()
 
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
-            access_token = create_access_token(identity=user.id, fresh=True)
-            refresh_token = create_refresh_token(user.id)
+            access_token = create_access_token(identity=str(user.id), fresh=True)
+            refresh_token = create_refresh_token(str(user.id))
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
 
         abort(401, message="Invalid credentials.")
@@ -58,6 +58,14 @@ class UserLogout(MethodView):
         jti = get_jwt()["jti"]
         BLOCKLIST.add(jti)
         return {"message": "Successfully logged out"}, 200
+    
+@blp.route("/logout")
+class UserLogout(MethodView):
+    @jwt_required()
+    def post(self):
+        jti = get_jwt()["jti"]
+        BLOCKLIST.add(jti)
+        return {"message": "Successfully logged out"}, 200    
 
 
 @blp.route("/user/<int:user_id>")
