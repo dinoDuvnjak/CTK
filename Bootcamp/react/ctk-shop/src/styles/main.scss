@@ -1,11 +1,38 @@
 // src/styles/main.scss
 
-// Define a primary color variable
+// Define a primary color variable (green/teal)
 $primary-teal: #4DB6AC;
+
+// Global resets and background
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $primary-teal; // Green background for the entire body
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// Set the root container as a flex column for sticky footer
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Main area grows to fill available space
+main {
+  flex: 1;
+}
 
 // Custom hero style for pages (e.g. login, register, etc.)
 .hero.primary-hero {
   background-color: $primary-teal;
+}
+
+.hero.is-fullheight.primary-hero {
+  min-height: 100vh;
+  width: 100%;
 }
 
 // Custom title style to ensure consistent typography
@@ -14,11 +41,13 @@ $primary-teal: #4DB6AC;
   margin-bottom: 1rem;
 }
 
-// Style the card for a unified look
+// Updated card styling for a nicer look
 .card {
+  background-color: #222;  // Dark background for the card
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
 }
 
 // Optional: Add spacing utility class
@@ -26,17 +55,10 @@ $primary-teal: #4DB6AC;
   margin-top: 1rem;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Our primary teal hero */
-.hero.is-fullheight.primary-hero {
-  background-color: #4DB6AC;  // or any teal shade you prefer
-  /* The lines below help ensure full width + height coverage */
-  min-height: 100vh;
-  width: 100%;
+// Footer styling (fixed at the bottom via flex layout)
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 }
