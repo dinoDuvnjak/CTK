@@ -62,3 +62,21 @@ main {
   padding: 1rem;
   text-align: center;
 }
+
+// New classes for centering forms
+.centered-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adjust the height based on your header/footer heights */
+    min-height: calc(100vh - 120px);
+  }
+  
+  .form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); // semi-transparent background
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
