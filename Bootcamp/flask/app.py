@@ -12,6 +12,7 @@ from flask_jwt_extended import JWTManager
 
 from db import db
 from blocklist import BLOCKLIST
+from flask_cors import CORS
 
 
 def create_app(db_url=None): 
@@ -101,5 +102,6 @@ def create_app(db_url=None):
     api.register_blueprint(StoreBlueprint)
     api.register_blueprint(TagBlueprint)
     api.register_blueprint(UserBlueprint)
+    CORS(app)  # This enables CORS for all routes and origins
 
     return app
