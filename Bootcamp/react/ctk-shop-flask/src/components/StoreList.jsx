@@ -1,91 +1,55 @@
 // src/components/StoreList.jsx
 import React, { useEffect, useState } from 'react';
-import { storesData } from '../data/dummyData'; // using dummy data for now
+import axios from 'axios';
 import StoreCard from './StoreCard';
 
 function StoreList() {
   const [stores, setStores] = useState([]);
-  // Track the store currently being edited (by its id)
-  const [editingStoreId, setEditingStoreId] = useState(null);
-  // Store the updated name while editing
-  const [editedName, setEditedName] = useState("");
+  const [error, setError] = useState('');
+
+  const fetchStores = () => {
+    axios.get('http://127.0.0.1:5000/store')
+      .then((response) => {
+        setStores(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Error fetching stores');
+      });
+  };
 
   useEffect(() => {
-    // Load dummy data (or later, your API call)
-    setStores(storesData);
+    fetchStores();
   }, []);
 
-  // When "Edit" is clicked, set the editing state for that store
-  const handleEditClick = (store) => {
-    setEditingStoreId(store.id);
-    setEditedName(store.name);
+  // Handle deletion by calling the API, then updating local state
+  const handleDelete = (store) => {
+    axios.delete(`http://127.0.0.1:5000/store/${store.id}`)
+      .then(() => {
+        setStores(stores.filter((s) => s.id !== store.id));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  // Save the edited name (simulate an API update)
-  const handleSave = (storeId) => {
-    const updatedStores = stores.map((store) =>
-      store.id === storeId ? { ...store, name: editedName } : store
-    );
-    setStores(updatedStores);
-    setEditingStoreId(null);
-  };
-
-  // Cancel editing
-  const handleCancel = () => {
-    setEditingStoreId(null);
+  // Handle update – currently, update logic is local.
+  // If you add an update endpoint, replace this with an axios.put call.
+  const handleUpdate = (updatedStore) => {
+    // Example: axios.put(`http://127.0.0.1:5000/store/${updatedStore.id}`, updatedStore)
+    setStores(stores.map((s) => s.id === updatedStore.id ? updatedStore : s));
   };
 
   return (
     <div className="columns is-multiline">
+      {error && <p>{error}</p>}
       {stores.map((store) => (
         <div key={store.id} className="column is-4">
-          {editingStoreId === store.id ? (
-            // Render an inline edit form for the store
-            <div className="card">
-              <div className="card-content">
-                <div className="field">
-                  <label className="label">Edit Store Name</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      value={editedName}
-                      onChange={(e) => setEditedName(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <footer className="card-footer">
-                <a
-                  href="#"
-                  className="card-footer-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSave(store.id);
-                  }}
-                >
-                  Save
-                </a>
-                <a
-                  href="#"
-                  className="card-footer-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCancel();
-                  }}
-                >
-                  Cancel
-                </a>
-              </footer>
-            </div>
-          ) : (
-            // Otherwise, render the normal StoreCard
-            <StoreCard
-              store={store}
-              onEdit={() => handleEditClick(store)}
-              onDelete={() => console.log("Delete store", store.id)}
-            />
-          )}
+          <StoreCard
+            store={store}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}  // used when inline editing is saved
+          />
         </div>
       ))}
     </div>

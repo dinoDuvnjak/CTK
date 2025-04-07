@@ -1,33 +1,53 @@
 // src/components/ItemList.jsx
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ItemCard from './ItemCard';
-import { itemsData } from '../data/dummyData';
 
 function ItemList() {
   const [items, setItems] = useState([]);
+  const [error, setError] = useState('');
 
-  useEffect(() => {
-    // Load placeholder data; later replace with your API call
-    setItems(itemsData);
-  }, []);
-
-  // Update the item in state after editing
-  const handleUpdate = (updatedItem) => {
-    setItems((prevItems) =>
-      prevItems.map((item) => (item.id === updatedItem.id ? updatedItem : item))
-    );
+  const fetchItems = () => {
+    const token = localStorage.getItem('access_token');
+    //console.log("token dsdfdsf", token);
+    axios.get('http://127.0.0.1:5000/item', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        setItems(response.data);
+      })
+      .catch(err => {
+        console.error(err);
+        setError('Error fetching items');
+      });
   };
 
-  // Remove an item from state after deletion
-  const handleDelete = (itemToDelete) => {
-    setItems((prevItems) =>
-      prevItems.filter((item) => item.id !== itemToDelete.id)
-    );
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const handleDelete = (item) => {
+    const token = localStorage.getItem('access_token');
+    axios.delete(`http://127.0.0.1:5000/item/${item.id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(() => {
+        setItems(items.filter(i => i.id !== item.id));
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  const handleUpdate = (updatedItem) => {
+    // Update local state after an update
+    setItems(items.map(i => i.id === updatedItem.id ? updatedItem : i));
   };
 
   return (
     <div className="columns is-multiline">
-      {items.map((item) => (
+      {error && <p>{error}</p>}
+      {items.map(item => (
         <div key={item.id} className="column is-4">
           <ItemCard
             item={item}

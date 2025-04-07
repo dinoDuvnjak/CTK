@@ -1,32 +1,29 @@
-// src/components/Register.jsx
+// src/components/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Register({ onRegister }) {
+function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/register', {
+      const response = await axios.post('http://127.0.0.1:5000/login', {
         username,
         password,
       });
-      setSuccess(response.data.message);
-      setError('');
-      onRegister && onRegister({ username });
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
+      // Save tokens (adjust as needed)
+      localStorage.setItem('access_token', response.data.access_token);
+      localStorage.setItem('refresh_token', response.data.refresh_token);
+      onLogin && onLogin({ username, ...response.data });
+      navigate('/stores');
     } catch (err) {
       console.error(err);
-      setError('Registration failed. Please try again.');
-      setSuccess('');
+      setError('Invalid username or password.');
     }
   };
 
@@ -34,8 +31,7 @@ function Register({ onRegister }) {
     <section className="section">
       <div className="container centered-form-container">
         <div className="form-wrapper">
-          <h1 className="title custom-title">Register</h1>
-          {success && <p style={{ color: 'green' }}>{success}</p>}
+          <h1 className="title custom-title">Login</h1>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="field">
@@ -66,12 +62,12 @@ function Register({ onRegister }) {
             </div>
             <div className="field">
               <button type="submit" className="button is-primary">
-                Register
+                Login
               </button>
             </div>
           </form>
           <p>
-            Already have an account? <Link to="/login">Login here</Link>
+            Don't have an account? <Link to="/register">Register here</Link>
           </p>
         </div>
       </div>
@@ -79,4 +75,4 @@ function Register({ onRegister }) {
   );
 }
 
-export default Register;
+export default Login;

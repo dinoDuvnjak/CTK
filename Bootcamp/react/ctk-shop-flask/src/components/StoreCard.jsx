@@ -1,26 +1,33 @@
 // src/components/StoreCard.jsx
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function StoreCard({ store, onUpdate, onDelete }) {
-  // Editing state for the entire card
   const [editing, setEditing] = useState(false);
-  // Store the new name and tags while editing
   const [editedName, setEditedName] = useState(store.name);
   const [editedTags, setEditedTags] = useState(store.tags || []);
   const [newTagName, setNewTagName] = useState("");
 
-  // Update local state if store prop changes
   useEffect(() => {
     setEditedName(store.name);
     setEditedTags(store.tags || []);
   }, [store]);
 
-  // Main save logic: update store name and tags
   const handleSave = () => {
-    if (onUpdate) {
-      onUpdate({ ...store, name: editedName, tags: editedTags });
-    }
-    setEditing(false);
+    const payload = {
+      name: editedName,
+      tags: editedTags.map(tag => ({ name: tag.name }))
+    };
+    axios.put(`http://127.0.0.1:5000/store/${store.id}`, payload)
+      .then(response => {
+        if (onUpdate) {
+          onUpdate(response.data);
+        }
+        setEditing(false);
+      })
+      .catch(err => {
+        console.error("Error updating store", err);
+      });
   };
 
   const handleCancel = () => {
@@ -29,7 +36,6 @@ function StoreCard({ store, onUpdate, onDelete }) {
     setEditing(false);
   };
 
-  // Tag editing functions
   const handleTagChange = (index, newValue) => {
     const updated = [...editedTags];
     updated[index] = { ...updated[index], name: newValue };
@@ -54,7 +60,6 @@ function StoreCard({ store, onUpdate, onDelete }) {
       {editing ? (
         <>
           <div className="card-content">
-            {/* Edit Store Name */}
             <div className="field">
               <label className="label">Store Name</label>
               <div className="control">
@@ -66,7 +71,6 @@ function StoreCard({ store, onUpdate, onDelete }) {
                 />
               </div>
             </div>
-            {/* Edit Tags */}
             <div className="mt-3">
               <p className="has-text-weight-semibold">Tags:</p>
               {editedTags.map((tag, index) => (
@@ -154,6 +158,20 @@ function StoreCard({ store, onUpdate, onDelete }) {
                 ))
               ) : (
                 <span>No tags</span>
+              )}
+            </div>
+            <div className="mt-3">
+              <p className="has-text-weight-semibold">Items:</p>
+              {store.items && store.items.length > 0 ? (
+                <ul>
+                  {store.items.map((item) => (
+                    <li key={item.id}>
+                      {item.name} - ${parseFloat(item.price).toFixed(2)}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <span>No items</span>
               )}
             </div>
           </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ onLogout }) {
   return (
     <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -16,7 +16,6 @@ function Header() {
           aria-expanded="false"
           data-target="navbarBasic"
           onClick={(e) => {
-            // Toggle burger menu for mobile view
             const target = document.getElementById('navbarBasic');
             e.currentTarget.classList.toggle('is-active');
             target.classList.toggle('is-active');
@@ -47,6 +46,9 @@ function Header() {
               <Link className="button is-light" to="/item/create">
                 Create Item
               </Link>
+              <button className="button is-danger" onClick={onLogout}>
+                Log Out
+              </button>
             </div>
           </div>
         </div>

@@ -4,46 +4,43 @@ import axios from 'axios';
 
 function StoreForm({ onStoreCreated }) {
   const [name, setName] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/store', { name })
-      .then(response => {
-        if (onStoreCreated) onStoreCreated(response.data);
+    axios.post('http://127.0.0.1:5000/store', { name })
+      .then((response) => {
+        onStoreCreated && onStoreCreated(response.data);
         setName('');
       })
-      .catch(err => {
-        console.error("Error creating store", err);
+      .catch((err) => {
+        console.error(err);
+        setError('Error creating store');
       });
   };
 
   return (
-    <section className="section">
-      <div className="container centered-form-container">
-        <div className="form-wrapper">
-          <form onSubmit={handleSubmit}>
-            <div className="field">
-              <label className="label">Store Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  placeholder="Enter store name"
-                  required
-                />
-              </div>
-            </div>
-            <div className="field">
-              <button type="submit" className="button is-primary">
-                Create Store
-              </button>
-            </div>
-          </form>
+    <form onSubmit={handleSubmit}>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div className="field">
+        <label className="label">Store Name</label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter store name"
+            required
+          />
         </div>
       </div>
-    </section>
+      <div className="field">
+        <button type="submit" className="button is-primary">
+          Create Store
+        </button>
+      </div>
+    </form>
   );
 }
 
