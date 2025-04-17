@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal CSS Method</title>
+    <!-- Internal CSS is defined in the style tag within the head section -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: blue;
+            font-size: 32px;
+            text-align: center;
+        }
+        
+        p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .code-example {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .code-title {
+            margin: 0;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .code-block {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+            background-color: #eaeaea;
+            padding: 10px;
+            font-family: monospace;
+        }
+        
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Internal CSS Method</h1>
+    <p>
+        Internal CSS is defined within the &lt;style&gt; tags in the &lt;head&gt; section of an HTML document. 
+        This method applies styles to the entire page but doesn't affect other HTML documents.
+    </p>
+    <div class="code-example">
+        <p class="code-title">Example code:</p>
+        <code class="code-block">
+&lt;head&gt;
+    &lt;style&gt;
+        h1 {
+            color: blue;
+            font-size: 32px;
+            text-align: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+        </code>
+    </div>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inline CSS Method</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: red; font-size: 32px; text-align: center;">Inline CSS Method</h1>
+    <p style="color: #666; font-size: 18px; line-height: 1.6;">
+        Inline CSS is applied directly to HTML elements using the <code>style</code> attribute. This method has the highest specificity and will override other CSS methods.
+    </p>
+    <div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+        <p style="margin: 0; font-weight: bold; color: #444;">Example code:</p>
+        <code style="display: block; margin-top: 10px; color: #333; background-color: #eaeaea; padding: 10px;">&lt;h1 style="color: red; font-size: 32px; text-align: center;"&gt;Inline CSS Method&lt;/h1&gt;</code>
+    </div>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>

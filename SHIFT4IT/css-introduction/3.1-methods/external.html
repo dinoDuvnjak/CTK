@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External CSS Method</title>
+    <!-- External CSS is linked from a separate file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>External CSS Method</h1>
+    <p>
+        External CSS is defined in a separate CSS file and linked to the HTML document using the &lt;link&gt; tag.
+        This method allows you to apply the same styles across multiple pages and keep your styling separate from your HTML.
+    </p>
+    <div class="code-example">
+        <p class="code-title">Example code in HTML:</p>
+        <code class="code-block">
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+        </code>
+        
+        <p class="code-title">Example code in styles.css:</p>
+        <code class="code-block">
+h1 {
+    color: green;
+    font-size: 32px;
+    text-align: center;
+}
+        </code>
+    </div>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>
