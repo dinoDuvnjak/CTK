@@ -1,0 +1,17 @@
+/* Primjeri različitih jedinica za font-size */
+
+.text-px {
+  font-size: 16px;        /* px = pikseli; apsolutna jedinica, najčešće korištena za preciznu kontrolu */
+}
+
+.text-pt {
+  font-size: 12pt;        /* pt = točke; tradicionalna tiskarska jedinica (1pt ≈ 1.333px) - WORD*/ 
+}
+
+.text-em {
+  font-size: 1.5em;       /* em = relativno na veličinu fonta roditeljskog (parent) elementa */
+}
+
+.text-rem {
+  font-size: 1.25rem;     /* rem = relativno na veličinu fonta korijenskog (<html>) elementa, ovo se treba koristiti umjesto em, posto je em opasan */
+}
