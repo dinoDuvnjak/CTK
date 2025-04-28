@@ -1,34 +1,39 @@
-ol {
-  margin-left: -40px;
-  margin-top: -20px;
-  list-style-position: inside;
+/* TODO 1: element selector for all <li> */
+li {
+  color: red;                /* every <li> becomes red */
 }
 
-
-/* Write your CSS below, don't change the rules above. */
-
-/* TODO 1: Set the CSS for all paragraph tags to "color: red;" */
-p {
-  color: red;
-}
-
-/* TODO 2: Set the CSS for all elements with a class of "note" to "font-size: 20px;" */
+/* TODO 2: class selector for .note */
 .note {
-  font-size: 20px;
+  font-size: 20px;           /* any element with class="note" gets larger text */
 }
 
-/* TODO 3: Set the CSS for the element with an id of "id-selector-demo" to "color: green;" */
+/* TODO 3: ID selector for #id-selector-demo */
 #id-selector-demo {
-  color: green;
+  color: green;              /* that specific list-item turns green */
 }
 
-/* TODO 4: Set the CSS for the li elements that have the "value" attribute set to "4" to have "color: blue;" */
+/* TODO 4: attribute selector for li[value="4"] */
 li[value="4"] {
-  color: blue;
+  color: blue;               /* only the one with value="4" becomes blue */
 }
 
-/* TODO 5: Set all elements to have "font-family: sans-serif;" */
-* {
-  text-align: center;
+/* TODO 5: universal selector for all elements */
+ol {
+  text-align: center;        /* every element is centered */
 }
 
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
+       url('../fonts/Roboto-Regular.woff')  format('woff');
+  font-weight: normal;      /* normal = 400 */
+  font-style: normal;       /* normal ili italic */
+}
+
+/* 2) Primijeni font na cijelu stranicu */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 40px;
+}
