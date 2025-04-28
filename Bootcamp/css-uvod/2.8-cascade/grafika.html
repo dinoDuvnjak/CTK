@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Cascade Visualization</title>
+  <style>
+    /* Reset i osnovno */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #fff;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      color: #333;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 600px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    /* Sloj */
+    .layer {
+      position: relative;
+      padding: 20px 30px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .layer::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+    }
+
+    .importance {
+      background: #e74c3c;
+    }
+    .importance::before {
+      border-left: 15px solid #e74c3c;
+    }
+
+    .specificity {
+      background: #3498db;
+    }
+    .specificity::before {
+      border-left: 15px solid #3498db;
+    }
+
+    .position {
+      background: #27ae60;
+    }
+    .position::before {
+      border-left: 15px solid #27ae60;
+    }
+
+    .type {
+      background: #f1c40f;
+      color: #333;
+    }
+    .type::before {
+      border-left: 15px solid #f1c40f;
+    }
+
+    /* Objašnjenja sitnim fontom */
+    .layer small {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CSS Cascade Layers</h1>
+
+    <div class="layer importance">
+      1. Importance  
+      <small>pravilo s <code>!important</code> uvijek pobjeđuje ostale</small>
+    </div>
+
+    <div class="layer specificity">
+      2. Specificity  
+      <small>inline (1000) &gt; ID (100) &gt; class/attribute (10) &gt; element (1)</small>
+    </div>
+
+    <div class="layer position">
+      3. Source Order  
+      <small>kasniji <code>selector</code> u kodu prepisuje ranije</small>
+    </div>
+
+    <div class="layer type">
+      4. Origin & Type  
+      <small>inline &gt; internal (&lt;style&gt;) &gt; external (&lt;link&gt;)</small>
+    </div>
+  </div>
+</body>
+</html>
