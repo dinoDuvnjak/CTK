@@ -1,112 +1,149 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>CSS Cascade Visualization</title>
   <style>
-    /* Reset i osnovno */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #fff;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      color: #333;
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      width: 600px;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-
-    /* Sloj */
-    .layer {
+    /* container */
+    .canvas {
       position: relative;
-      padding: 20px 30px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 1000px;
+      height: 720px;
+      margin: 40px auto;
+      background: #fff;
+      font-family: "Segoe UI", sans-serif;
+      color: #222;
     }
-    .layer::before {
-      content: "";
+
+    /* code box shared styles */
+    .code-box {
       position: absolute;
-      top: 50%;
-      right: -15px;
-      transform: translateY(-50%);
-      width: 0; height: 0;
-      border-top: 15px solid transparent;
-      border-bottom: 15px solid transparent;
+      background: #2d2d2d;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #f8f8f2;
+      white-space: pre;
     }
 
-    .importance {
-      background: #e74c3c;
-    }
-    .importance::before {
-      border-left: 15px solid #e74c3c;
-    }
-
-    .specificity {
-      background: #3498db;
-    }
-    .specificity::before {
-      border-left: 15px solid #3498db;
+    /* labels */
+    .label {
+      position: absolute;
+      font-size: 1.4rem;
+      font-weight: 600;
     }
 
-    .position {
-      background: #27ae60;
+    /* Position */
+    .position .label {
+      top: 20px;
+      right: 20px;
     }
-    .position::before {
-      border-left: 15px solid #27ae60;
-    }
-
-    .type {
-      background: #f1c40f;
-      color: #333;
-    }
-    .type::before {
-      border-left: 15px solid #f1c40f;
+    .position .code-box {
+      top: 60px;
+      right: 20px;
+      width: 240px;
     }
 
-    /* Objašnjenja sitnim fontom */
-    .layer small {
-      display: block;
-      margin-top: 6px;
-      font-size: 0.85rem;
-      opacity: 0.85;
+    /* Specificity */
+    .specificity .label {
+      top: 240px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .specificity .code-box {
+      top: 280px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+    }
+
+    /* Type */
+    .type .label {
+      top: 420px;
+      left: 40px;
+    }
+    .type .code-box {
+      top: 460px;
+      left: 40px;
+      width: 380px;
+    }
+
+    /* Importance */
+    .importance .label {
+      top: 620px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .importance .code-box {
+      top: 660px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+    }
+
+    /* syntax colors */
+    .c-red    { color: #e74c3c; }
+    .c-blue   { color: #3498db; }
+    .c-purple { color: #9b59b6; }
+    .c-orange { color: #e67e22; }
+    .c-green  { color: #2ecc71; }
+
+    /* footer */
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>CSS Cascade Layers</h1>
 
-    <div class="layer importance">
-      1. Importance  
-      <small>pravilo s <code>!important</code> uvijek pobjeđuje ostale</small>
+  <div class="canvas">
+
+    <div class="position">
+      <div class="label">Position</div>
+      <div class="code-box">
+<li> {  
+  <span class="c-red">color: red;</span>  
+  <span class="c-blue">color: blue;</span>  
+}
+      </div>
     </div>
 
-    <div class="layer specificity">
-      2. Specificity  
-      <small>inline (1000) &gt; ID (100) &gt; class/attribute (10) &gt; element (1)</small>
+    <div class="specificity">
+      <div class="label">Specificity</div>
+      <div class="code-box">
+li { <span class="c-blue">color: blue;</span> }  
+.first-class { <span class="c-red">color: red;</span> }  
+li[draggable] { <span class="c-purple">color: purple;</span> }  
+#first-id { <span class="c-orange">color: orange;</span> }
+      </div>
     </div>
 
-    <div class="layer position">
-      3. Source Order  
-      <small>kasniji <code>selector</code> u kodu prepisuje ranije</small>
+    <div class="type">
+      <div class="label">Type</div>
+      <div class="code-box">
+&lt;link rel="stylesheet" href="./style.css"&gt;  
+&lt;style&gt;&lt;/style&gt;  
+&lt;h1 style=""&gt;Hello&lt;/h1&gt;
+      </div>
     </div>
 
-    <div class="layer type">
-      4. Origin & Type  
-      <small>inline &gt; internal (&lt;style&gt;) &gt; external (&lt;link&gt;)</small>
+    <div class="importance">
+      <div class="label">Importance</div>
+      <div class="code-box">
+color: red;  
+color: <span class="c-green">green !important</span>;
+      </div>
     </div>
+
+    <div class="footer">www.appbrewery.com</div>
   </div>
+
 </body>
 </html>

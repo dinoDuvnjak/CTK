@@ -23,17 +23,5 @@ ol {
   text-align: center;        /* every element is centered */
 }
 
+/* TODO 6: descendant selector for li > .note */
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto-Regular.woff2') format('woff2'),
-       url('../fonts/Roboto-Regular.woff')  format('woff');
-  font-weight: normal;      /* normal = 400 */
-  font-style: normal;       /* normal ili italic */
-}
-
-/* 2) Primijeni font na cijelu stranicu */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 40px;
-}
