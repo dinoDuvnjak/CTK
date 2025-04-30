@@ -1,0 +1,13 @@
+h1{
+    font-size: 2em;
+    
+}
+
+
+h1{
+    font-weight: bolder; /* bold, bolder, normal, lighter, 100-900 */
+}
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

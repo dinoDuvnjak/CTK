@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flex vs. Column Demo</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .item {
+      flex: 0 0 30%;
+      height: 100px;
+      background: tomato;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column; /* switch to vertical */
+      }
+      .item {
+        margin-bottom: 15px;
+        flex: none;
+        width: 100%;
+      }
+      .item:last-child {
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="item">Box 1</div>
+    <div class="item">Box 2</div>
+    <div class="item">Box 3</div>
+  </div>
+
+</body>
+</html>
