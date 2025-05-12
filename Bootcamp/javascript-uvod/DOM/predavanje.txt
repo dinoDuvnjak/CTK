@@ -1,0 +1,38 @@
+- objasni sta znaci dom
+- udjite u konzolu i pogledajte console.log(document)
+- igraj se malo sa 
+    document.firstElementChild.firstElementChild
+    document.lastElementChild
+    document.firstElementChild.firstElementChild.lastElementChild.firstElementChild
+    # dograbi h1
+    document.firstElementChild.lastElementChild.firstElementChild
+
+    #poigraj se sa naslovom
+    var heading = document.firstElementChild.lastElementChild.firstElementChild;
+    heading.innerHTML = "Good bye";
+    heading.style.color = "red";
+
+    #poigraj se sa klikom
+    document.querySelector("input").click()
+
+    - nastavi sa slajdovima, izvjezbaj sve getelemsnts and quesry selectors iz predavanja
+
+    - na kraju pokazi razliku u selektorima i kako ih mozes kombinirati
+    - dodj jos jedan link ispod buttona i onda vidi sta si selektirao
+        document.querySelector("a");
+        # ovajje preciznji i selektriati ce bas u li
+        document.querySelector("li a");
+        # primjer sa klasom 
+        document.querySelector("li.imeklase");
+
+        document.querySelector(".imeklase");
+
+        document.querySelector("#imeID");
+
+        #pokazi primjer 
+        document.querySelector(".list");
+        document.querySelectorAll(".list");
+
+
+
+
