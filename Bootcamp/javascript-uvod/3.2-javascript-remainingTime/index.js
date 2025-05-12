@@ -15,6 +15,7 @@ function preostaloVremena(trenutnaDob) {
     ${danaPreostalo} dana,
     ${tjedanaPreostalo} tjedana,
     ${mjeseciPreostalo} mjeseci.`);
+    
   }
   
   // Primjer poziva funkcije:
