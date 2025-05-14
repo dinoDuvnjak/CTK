@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAME CONTROLS</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      margin-bottom: 2rem;
+      letter-spacing: 0.5rem;
+    }
+    .controls {
+      display: flex;
+      gap: 2rem;
+    }
+    .key {
+      font-size: 5rem;
+      padding: 1rem 2rem;
+      border: 2px solid #fff;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.1s ease, background-color 0.1s ease;
+      user-select: none;
+    }
+    .key.active {
+      transform: scale(1.2);
+      background-color: #f39c12;
+      color: #111;
+    }
+    footer {
+      position: absolute;
+      bottom: 1rem;
+    }
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>GAME CONTROLS</h1>
+  <div class="controls">
+    <div class="key" id="KeyW">W</div>
+    <div class="key" id="KeyA">A</div>
+    <div class="key" id="KeyS">S</div>
+    <div class="key" id="KeyD">D</div>
+  </div>
+
+  <footer>
+    <p><a href="https://www.ctk-games.com" target="_blank">www.ctk-games.com</a></p>
+  </footer>
+
+  <script>
+    // Function to animate a key element
+    // Add click listeners to each key div
+    // Listen for keydown events
+  </script>
+</body>
+</html>

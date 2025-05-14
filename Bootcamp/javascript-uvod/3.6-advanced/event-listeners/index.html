@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click Counter</title>
+
+  <style>
+    #colorBox {
+      width: 200px;
+      height: 200px;
+      background: #ccc;
+      transition: background 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <button id="clickMe">Click me!</button>
+  <p>Clicks: <span id="count">0</span></p>
+
+  <div id="colorBox"></div>
+
+  <script>
+    //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+
+    const button = document.getElementById('clickMe');
+    const countSpan = document.getElementById('count');
+    let counter = 0;
+
+
+    
+    // anonymous function
+    button.addEventListener('click', function () {
+      counter++;
+      countSpan.textContent = counter;
+      console.log(`Button clicked ${counter} times`);
+    });
+
+    // named function
+    function handleClick() {
+      counter++;
+      countSpan.textContent = counter;
+      console.log(`Button clicked ${counter} times`);
+    }
+
+
+    const box = document.getElementById('colorBox');
+
+    box.addEventListener('mouseenter', () => {
+      box.style.background = '#4caf50'; // green on hover
+    });
+
+    box.addEventListener('mouseleave', () => {
+      box.style.background = '#ccc'; // revert on leave
+    });
+
+
+
+  </script>
+</body>
+</html>
