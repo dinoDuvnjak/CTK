@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            // Kreiranje objekta
+            // problem kada moramo kreirati više objekata iste vrste
+            const zivotinja = {
+                vrsta: 'Pas',
+                ime: 'Rex',
+                dob: 5,
+                jeDomaca: true,
+                omiljenaHrana: ['Meso', 'Kosti', 'Biskviti'],
+                info: function() {
+                    console.log(`Životinja vrste ${this.vrsta} po imenu ${this.ime} ima ${this.dob} godina.`);
+                }
+            };
+
+            // Pristup atributima
+            console.log(zivotinja.ime);              // Output: Rex
+            console.log(zivotinja.omiljenaHrana[0]); // Output: Meso
+            //console.log(zivotinja.info());           
+
+
+
+            // Konstruktor funkcija
+            function Zivotinja(vrsta, ime, dob, jeDomaca, omiljenaHrana) {
+                this.vrsta = vrsta;
+                this.ime = ime;
+                this.dob = dob;
+                this.jeDomaca = jeDomaca;
+                this.omiljenaHrana = omiljenaHrana;
+                this.info = function() {
+                    console.log("sdfsdfds");
+                    alert(`Životinja vrste ${this.vrsta} po imenu ${this.ime} ima ${this.dob} godina.`);
+                };
+            }
+
+            
+            
+            // Kreiranje novih objekata
+            const zivotinja1 = new Zivotinja('Pas', 'Rex', 5, true, ['Meso', 'Kosti']);
+            const zivotinja2 = new Zivotinja('Mačka', 'Mia', 3, true, ['Riba', 'Mlijeko']);
+            
+            
+            // Dodavanje metode objektu
+            zivotinja1.napraviZvuk = function() {
+                console.log(`Životinja vrste ${this.vrsta} po imenu ${this.ime} glasno laje.`);
+            };
+            
+            //zivotinja1.info();
+            // Pozivanje metode
+            zivotinja1.napraviZvuk();
+
+
+
+            ///// VJEZBA
+            // 1️⃣ Definicija konstruktora
+            function Car(brand, model, year) {
+            // 2️⃣ Dodavanje svojstava
+            this.brand = brand;
+            this.model = model;
+            this.year = year;
+
+            // 3️⃣ Definicija metode za ispis informacija o autu
+            this.getCarInfo = function () {
+                console.log(`This car is a ${this.brand} ${this.model} from ${this.year}.`);
+            };
+
+            // 4️⃣ Dodatna metoda za pokretanje motora
+            this.startEngine = function () {
+                console.log(`The ${this.brand} ${this.model}'s engine has started.`);
+            };
+            }
+
+            // 5️⃣ Kreiranje objekta pomoću konstruktora
+            const myCar = new Car("Toyota", "Corolla", 2022);
+
+            // 6️⃣ Pozivanje metoda
+            myCar.getCarInfo();    // ➡️ This car is a Toyota Corolla from 2022.
+            myCar.startEngine();   // ➡️ The Toyota Corolla's engine has started.
+
+    </script>
+    
+</body>
+</html>

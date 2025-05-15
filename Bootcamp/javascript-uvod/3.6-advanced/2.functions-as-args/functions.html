@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click Counter</title>
+
+  <style>
+    #colorBox {
+      width: 200px;
+      height: 200px;
+      background: #ccc;
+      transition: background 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <button id="clickMe">Click me!</button>
+  <p>Clicks: <span id="count">0</span></p>
+
+  <div id="colorBox"></div>
+
+  <script>
+    //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+
+    // problem
+    function calclulator(a,b){
+      return a + b;
+    }
+
+    function calclulator(a,b){
+      return a - b;
+    }
+
+
+    function add(a, b) {
+      return a + b;
+    }
+
+    function subtract(a, b) {
+      return a - b;
+    }
+
+    function multiply(a, b) {
+      return a * b;
+    }
+
+    function divide(a, b) {
+      return a / b;
+    }
+
+    function calculate(a, b, operation) {
+      return operation(a, b);
+    }
+
+    console.log(calculate(5, 3, add)); // 8
+    console.log(calculate(5, 3, subtract)); // 2
+    console.log(calculate(5, 3, multiply)); // 15
+    console.log(calculate(5, 3, divide)); // 1.6666666666666667
+
+
+
+  </script>
+</body>
+</html>
