@@ -24,4 +24,19 @@
 
   </body>
 
+  <script>
+    document.querySelectorAll('li').forEach(myfunction)
+
+    document.querySelectorAll('li').forEach(
+      function(item) {
+        item.innerHTML = "Hello World";
+      }
+    );
+
+
+    function myfunction(item) {
+      item.innerHTML = "Hello World";
+    }
+  </script>
+
 </html>

@@ -9,10 +9,52 @@
     <script>
 
         //pokazi u konzoli
+        // ovo je callback funkcija
+        // funkcija koja se poziva kada se dogodi neki događaj
+        // to poziva sam objekat, a ne mi
         document.addEventListener("keydown", function(e) {
-            console.log(e);
+            //console.log(e);
             //console.log("Pritisnuta tipka:", e.key);
         });
+
+        //primjer custom event listenera
+        function customEventListener(type, callback) {
+
+            const event = { 
+                type: "keypress",
+                key: "Enter", 
+                message: "Custom event triggered!" 
+            };
+
+            if (type === event.type) {
+                callback(event);
+            }
+        }
+
+        customEventListener("keypress", function(event) {
+            console.log(event);
+        });
+
+
+        //primjer mrezne simulacije
+        function dohvatiPodatke(url, callback) {
+            // simuliramo mrežno kašnjenje
+            //napisi settimeout ali bez arrow funkcije
+            setTimeout(function (params) {
+                const data = { id: 1, name: 'Pero' }; 
+                callback(null, data);
+            }, 1500)
+        }
+
+        // error-first callback: prvo error, pa rezultat
+        dohvatiPodatke('https://api.example.com/user', (err, korisnik) => {
+        if (err) {
+            console.error('Greška pri dohvaćanju:', err);
+            return;
+        }
+        console.log('Korisnik:', korisnik);
+        });
+
 
         //primjer iz svijet
         // fetch("https://api.example.com/podaci")

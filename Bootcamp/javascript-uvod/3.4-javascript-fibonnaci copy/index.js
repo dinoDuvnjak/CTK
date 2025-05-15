@@ -10,7 +10,8 @@ function fibonacci(n) {
     
     // Generiranje ostalih elemenata Fibonacci niza
     for (let i = 2; i < n; i++) {
-      fib[i] = fib[i - 1] + fib[i - 2];
+        // Svaki novi element je zbroj prethodna dva
+      fib[i] = fib[i - 1] + fib[i - 2]; 
     }
     
     return fib;
@@ -19,3 +20,5 @@ function fibonacci(n) {
   // Primjer poziva funkcije:
   console.log(fibonacci(7)); // Očekivani izlaz: [0, 1, 1, 2, 3, 5, 8]
   
+  //daj mi primer prve tri iteracije kako petlja radi
+  // Iteracija 1: i = 2, fib[2] = fib[1] + fib[0] => fib[2] = 1 + 0 => fib = [0, 1, 1]
