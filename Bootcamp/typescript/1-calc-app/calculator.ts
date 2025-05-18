@@ -11,7 +11,7 @@ const formEl = document.querySelector('form');
 if (formEl) { // moramo provjeriti da li je formEl null
   formEl.addEventListener('submit', function (event) {
     event.preventDefault();
-    const fd = new FormData(event.currentTarget as HTMLFormElement);
+    const fd = new FormData(event.currentTarget as HTMLFormElement); // moramo provjeriti da li je event.currentTarget null
     const inputPrice = fd.get('price');
     if (inputPrice !== null) { // moramo provjeriti da li je inputPrice null
       deriveFinalPrice(+inputPrice); // mozemo koristiti + za konverziju u number

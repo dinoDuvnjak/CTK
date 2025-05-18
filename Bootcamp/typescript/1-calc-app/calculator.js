@@ -1,5 +1,5 @@
 function deriveFinalPrice(inputPrice) {
-    var finalPrice = inputPrice + inputPrice * 0.19;
+    var finalPrice = inputPrice + inputPrice * 1.10;
     console.log('Final Price: ' + finalPrice + ' €');
     // var outputEl = document.getElementById('final-price');
     // if (outputEl) { // moramo provjeriti da li je outputEl null

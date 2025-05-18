@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Zivotinja(vrsta, ime, dob, jeDomaca, omiljenaHrana) {
+                this.vrsta = vrsta;
+                this.ime = ime;
+                this.dob = dob;
+                this.jeDomaca = jeDomaca;
+                this.omiljenaHrana = omiljenaHrana;
+                this.info = function() {
+                    console.log("sdfsdfds");
+                    alert(`Životinja vrste ${this.vrsta} po imenu ${this.ime} ima ${this.dob} godina.`);
+                };
+            }
+        const pas = new Zivotinja('Pas', 'Rex', 5, true, ['Meso', 'Kosti']);
+
+// Pretpostavimo da si od korisnika dobio string:
+const input = prompt("Unesi naziv novog svojstva:"); // npr. "dlakav"
+const inputVal = prompt("Unesi naziv nove vrijednost:"); // npr. "dlakav"
+
+// I vrijednost:
+//const vrijednost = confirm("Je li dlakav?") ? true : false;
+
+// Dinamičko dodavanje:
+pas[input] = inputVal;
+
+console.log("log novi properti:", pas[input]); // true (ako je korisnik unio "dlakav")
+console.log(pas); // true (ako je korisnik unio "dlakav")
+
+    </script>
+</body>
+</html>
