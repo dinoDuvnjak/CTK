@@ -34,21 +34,21 @@ class Printer(Device):
         self.remaining_pages -= pages       # Smanjuje broj preostalih stranica za broj ispisanih stranica
 
 # Primjer korištenja nasljedstva
-if __name__ == "__main__":
-    # Kreiranje objekta Printer (podklasa Device) s nazivom, načinom povezivanja i kapacitetom od 500 stranica
-    device_printer = Printer("Printer", "USB", 500)
-    
-    # Ispis informacija o printeru (poziva __str__ metodu nadklase i podklase)
-    print(device_printer)
-    
-    # Ispis 20 stranica pomoću metode print_pages
-    device_printer.print_pages(20)
-    
-    # Ispis ažuriranih informacija o printeru (preostale stranice se ažuriraju)
-    print(device_printer)
-    
-    # Isključivanje printera pomoću metode disconnect iz nadklase Device
-    device_printer.disconnect()
-    
-    # Pokušaj ispisa nakon prekida spojenosti (ispisuje upozorenje)
-    device_printer.print_pages(30)
+#if __name__ == "__main__":
+# Kreiranje objekta Printer (podklasa Device) s nazivom, načinom povezivanja i kapacitetom od 500 stranica
+device_printer = Printer("Printer", "USB", 500)
+
+# Ispis informacija o printeru (poziva __str__ metodu nadklase i podklase)
+print(device_printer)
+
+# Ispis 20 stranica pomoću metode print_pages
+device_printer.print_pages(20)
+
+# Ispis ažuriranih informacija o printeru (preostale stranice se ažuriraju)
+print(device_printer)
+
+# Isključivanje printera pomoću metode disconnect iz nadklase Device
+device_printer.disconnect()
+
+# Pokušaj ispisa nakon prekida spojenosti (ispisuje upozorenje)
+device_printer.print_pages(30)
