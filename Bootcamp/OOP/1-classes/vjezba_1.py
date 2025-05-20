@@ -5,9 +5,10 @@ class Store:
     
     def add_item(self, name, price):
         self.items.append({'name': name, 'price': price})
-        return self.items
+        #return self.items
 
     def stock_price(self):
+        #print(item['price'] for item in self.items)
         return sum([item['price'] for item in self.items])
     
 store = Store('JYSK')

@@ -1,51 +1,85 @@
 class Store:
     def __init__(self, name):
-        """
-        Konstruktor (inicijalizator) za klasu Store.
-        Parametar 'name' predstavlja naziv trgovine.
-        """
         self.name = name
         self.items = []
 
     def add_item(self, name, price):
         """
-        Dodaje stavku (proizvod) u trgovinu.
-        'name' je naziv proizvoda, a 'price' cijena proizvoda.
+        Dodaje stavku u trgovinu.
         """
-        self.items.append({"name": name, "price": price})
+        self.items.append({'name': name, 'price': price})
 
     def stock_price(self):
         """
-        Vraća ukupnu cijenu svih stavki (proizvoda) u trgovini.
+        Vraća ukupnu cijenu svih stavki u trgovini.
         """
-        return sum(item["price"] for item in self.items)
+        return sum(item['price'] for item in self.items)
+
+    def __str__(self):
+        """
+        Vraća opis objekta Store u formatu:
+        "Store: {name}, Items: {count}, Total value: {value:.2f}"
+        """
+        return (f"Store: {self.name}, Items: {len(self.items)}, "
+                f"Total value: {self.stock_price():.2f}")
 
     @staticmethod
     def franchise(store):
         """
-        Vraća novu instancu klase Store, s nazivom koji je jednak
-        nazivu postojeće trgovine + " - franchise".
+        Vraća novu instancu Store s nazivom
+        existing_name + " - Franchise".
         """
-        return Store(store.name + " - franchise")
+        return Store(store.name + " - Franchise")
 
     @staticmethod
-    def store_details(store):
+    def compare_value(store1, store2):
         """
-        Vraća string s detaljima o trgovini u formatu:
-        "<naziv_trgovine>, total stock price: X"
-        gdje je X ukupan zbroj cijena (stock_price).
-        Koristimo int() zaokruživanje na cijeli broj.
+        Vraća naziv trgovine s većom ukupnom vrijednošću zaliha.
         """
-        return f"{store.name}, total stock price: {int(store.stock_price())}"
+        if store1.stock_price() >= store2.stock_price():
+            return store1.name
+        return store2.name
 
+    @classmethod
+    def from_year(cls, year):
+        """
+        Vraća Store kojemu je naziv string godine.
+        """
+        return cls(str(year))
+
+    @classmethod
+    def from_item_list(cls, items_list):
+        """
+        items_list je lista tupleova (naziv, cijena).
+        Vraća instancu Store s tim stavkama.
+        Naziv trgovine je "Custom Store".
+        """
+        store = cls("Custom Store")
+        for name, price in items_list:
+            store.add_item(name, price)
+        return store
 
 # Primjer korištenja:
-store = Store("Test")
-store2 = Store("Amazon")
-store2.add_item("Keyboard", 160)
+if __name__ == "__main__":
+    store = Store('JYSK')
+    store.add_item('Stolica', 150)
+    store.add_item('Stol', 200)
+    print(store)  # Store: JYSK, Items: 2, Total value: 350.00
 
-print(Store.franchise(store))   # Ispis: <__main__.Store object at ...> s nazivom "Test - franchise"
-print(Store.franchise(store2))  # Ispis: <__main__.Store object at ...> s nazivom "Amazon - franchise"
+    # Franchise example
+    fr = Store.franchise(store)
+    print(fr)    # Store: JYSK - Franchise, Items: 0, Total value: 0.00
 
-print(Store.store_details(store))   # "Test, total stock price: 0"
-print(Store.store_details(store2))  # "Amazon, total stock price: 160"
+    # Compare value
+    store2 = Store('IKEA')
+    store2.add_item('Lampa', 100)
+    print(Store.compare_value(store, store2))  # JYSK
+
+    # From year
+    s_year = Store.from_year(1995)
+    print(s_year)  # Store: 1995, Items: 0, Total value: 0.00
+
+    # From item list
+    items = [('Book', 20), ('Pen', 5)]
+    s_custom = Store.from_item_list(items)
+    print(s_custom)  # Store: Custom Store, Items: 2, Total value: 25.00

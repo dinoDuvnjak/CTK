@@ -87,3 +87,33 @@ print(book)
 
 book2 = Book.paperback("Python 101", 600)
 print(book2)
+
+
+class SomeClass:
+    def __init__(self, name, number):
+        self.name = name
+        self.number = 0
+
+    def instanceMethod(self):
+        print(f'Called instance_method of {self}')    
+
+    @classmethod
+    def classMethod(cls):
+        print(f'Called class_method of {cls}')    
+
+    @staticmethod
+    def staticMethod():
+        print('Called static_method')    
+
+#uvijek treba instancirati klasu ili na ovaj ili na drugi nacin
+nekaKlasa = SomeClass("Test", 5)
+nekaKlasa.instanceMethod()
+SomeClass.instanceMethod(nekaKlasa)        
+
+# classMethod() i staticMethod() su metode klase, a ne instance.
+SomeClass.classMethod()
+#nekaKlasa.classMethod() # ovo ne radi
+
+SomeClass.staticMethod()
+#ovo radi ali staticka metoda nije vezana za instancu
+nekaKlasa.staticMethod()
