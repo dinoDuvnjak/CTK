@@ -217,6 +217,42 @@ let user5: User5 = {
   }
 }
 
+const obj: {
+  name: string;
+  age: number;
+  info: () => string; // Koristimo tip UserRoles
+} = {
+  name: "Ana",
+  age: 30,
+  info() {
+    return `${this.name} ima ${this.age} godina`;
+  }
+}
+
+const obj2: {
+  name: string;
+  age: number;
+  info: () => string;
+  [key: string]: any;
+} = {
+  name: "Ana",
+  age: 30,
+  info() {
+    return `${this.name} ima ${this.age} godina`;
+  }
+};
+obj2.pozdrav = function() {
+  return `Ćao, ${this.name}!`;
+};
+console.log(obj2.pozdrav());
+
+// dinamički dodajemo funkciju
+obj.zdravo = function(name: string) {
+  console.log(`Bok, ${name}!`);
+};
+
+obj.zdravo("Ana");  // Ispis: Bok, Ana!
+
 
 //specijalini tipovi
 // null i undefined
@@ -257,7 +293,7 @@ console.log(inputEl1.value); // Pristup vrijednosti input elementa
 // TypeScript 3.0 je uveo novi tip "unknown" koji je sigurniji od "any"
 // "unknown" tip može sadržavati bilo koju vrijednost, ali ne možemo ga koristiti bez prethodnog provjeravanja tipa
 let value: unknown; // Varijabla tipa unknown
-value = "Primjer"; // Dodavanje stringa
+value = "Primjer"; // Dodavanje stringa 
 value = 30; // Dodavanje broja
 
 function neka(val: any){
