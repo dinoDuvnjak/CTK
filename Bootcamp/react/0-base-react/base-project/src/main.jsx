@@ -23,6 +23,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Footer from './footer';
+import Card from './Card';
+import Hooks from './5-hooks';
 
 ////// igranje sa JSX-om
 
@@ -149,12 +151,13 @@ import Footer from './footer';
 
 
 ////// import export
-// import pi from './import_predavanja';
-// import pi,{doublePi, triplePi} from './import_predavanja';
+// import pi from './import_predavanja'; // pie moze biti stagod ako je default export
+// import pi,{doublePi, triplePi} from './import_predavanja'; // // pi je default export, a doublePi i triplePi su named exports
 
 // moze i ovo
-//import * as pi from './import_predavanja'; // sve iz modula
-//console.log(pi);
+//import * as pi from './import_predavanja'; // sve iz modula, ovo nije optimizirano, 
+// sa default exportom i named exports je bolje jel uvozimo samo ono sta nam treba
+//console.log(pi); //pokazi ovo
 
 
 // const doublePires = doublePi();
@@ -168,50 +171,103 @@ import Footer from './footer';
 
 // VJEZBA DAJ IM HTML I NEKA NAPRAVE CARD KOMPOENENTU
 
-import Card from './Card';
+//import Card from './Card';
 
-const myElement =
-  <div>
-    <h1>My Contacts</h1>
+// const myElement =
+//   <div>
+//     <h1>My Contacts</h1>
 
-    <Card name="Dino Babić" img="https://www.w3schools.com/images/w3schools_green.jpg" tel_num="+387 61 234 567" />
+//     <Card name="Dino Babić" img="https://www.w3schools.com/images/w3schools_green.jpg" tel_num="+387 61 234 567" />
 
-    <Card name="Beyonce" img="https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg" tel_num="+123 456 789" />
+//     <Card name="Beyonce" img="https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg" tel_num="+123 456 789" />
 
-    <h2>Beyonce</h2>
-    <img
-      src="https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg"
-      alt="avatar_img"
-    />
-    <p>+123 456 789</p>
-    <p>b@beyonce.com</p>
+//     <h2>Beyonce</h2>
+//     <img
+//       src="https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg"
+//       alt="avatar_img"
+//     />
+//     <p>+123 456 789</p>
+//     <p>b@beyonce.com</p>
 
-    // make card beyonce
+//     // make card beyonce
 
-    <h2>Jack Bauer</h2>
-    <img
-      src="https://pbs.twimg.com/profile_images/625247595825246208/X3XLea04_400x400.jpg"
-      alt="avatar_img"
-    />
-    <p>+987 654 321</p>
-    <p>jack@nowhere.com</p>
+//     <h2>Jack Bauer</h2>
+//     <img
+//       src="https://pbs.twimg.com/profile_images/625247595825246208/X3XLea04_400x400.jpg"
+//       alt="avatar_img"
+//     />
+//     <p>+987 654 321</p>
+//     <p>jack@nowhere.com</p>
 
-    <h2>Chuck Norris</h2>
-    <img
-      src="https://i.pinimg.com/originals/e3/94/47/e39447de921955826b1e498ccf9a39af.png"
-      alt="avatar_img"
-    />
-    <p>+918 372 574</p>
-    <p>gmail@chucknorris.com</p>
-  </div>
+//     <h2>Chuck Norris</h2>
+//     <img
+//       src="https://i.pinimg.com/originals/e3/94/47/e39447de921955826b1e498ccf9a39af.png"
+//       alt="avatar_img"
+//     />
+//     <p>+918 372 574</p>
+//     <p>gmail@chucknorris.com</p>
+
+//   </div>
+
+/////////// KADA OVO ZAVRSE OBJASNI IM DEV TOOLS
+
+/////////// POSLIJE TOGA IDE VJEZBA DA OD OVA elementa koji bi trebali sito izgledati naprave komponentu Detail, 
+// to se nalazi u CARD kompnenti
+// i neka im prebace
+//<p>+918 372 574</p>
+//     <p>gmail@chucknorris.com</p>
 
 
+////////// MAPPING DATA TO COMPONENTS
+//1-map-filter-reduce.js
+//1.1-mapping-to-contacts.jsx
+
+// import contacts from './contacts';
+// //  import Card from './Card';  
+// import Form from './Form';
+
+// const kontakti = contacts.map((contact) => {
+//   // console.log(contact.name);
+//   // console.log(contact.imgURL);
+//   // console.log(contact.phone);
+//   // console.log(contact.email);
+//   return <Card
+//     key={contact.id}
+//     name={contact.name}
+//     img={contact.imgURL}
+//     tel_num={contact.phone}
+//     email={contact.email}
+//   />;
+// }
+// );  
+
+// // if user is logged in, show contacts
+// // if user is not logged in, show login form
+
+// const isLoggedIn = false; // change this to false to show login form
+// const myElement =
+//   <div>
+//     <h1>My Contacts</h1>
+//     {isLoggedIn ? kontakti : <Form />}
+//     {/* <Card name="Dino Babić" img="https://www.w3schools.com/images/w3schools_green.jpg" tel_num="+387 61 234 567" /> */}
+//     {/* <Card name="Beyonce" img="https://blackhistorywall.files.wordpress.com/2010/02/picture-device-independent-bitmap-119.jpg" tel_num="+123 456 789" /> */}
+//   </div>;
+// // const myElement = <h1>I Love JSX!</h1><p>neki</p>; // ovo ne radi jer JSX nije validan, samo jedan element može biti u JSX-u
+
+///// STATE IN REACT
+//4-state-inreacts.jsx
+
+let myElement =
+<>
+ <Hooks></Hooks>
+</>
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(myElement);
+  root.render(myElement);
+
 
 
 
