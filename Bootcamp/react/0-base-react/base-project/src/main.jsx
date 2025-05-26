@@ -25,6 +25,8 @@ import './index.css';
 import Footer from './footer';
 import Card from './Card';
 import Hooks from './5-hooks';
+import Events from './6-events';
+import Forms from './7-Forms';
 
 ////// igranje sa JSX-om
 
@@ -152,12 +154,12 @@ import Hooks from './5-hooks';
 
 ////// import export
 // import pi from './import_predavanja'; // pie moze biti stagod ako je default export
-// import pi,{doublePi, triplePi} from './import_predavanja'; // // pi je default export, a doublePi i triplePi su named exports
+// //import pi,{doublePi, triplePi} from './import_predavanja'; // // pi je default export, a doublePi i triplePi su named exports
 
-// moze i ovo
-//import * as pi from './import_predavanja'; // sve iz modula, ovo nije optimizirano, 
-// sa default exportom i named exports je bolje jel uvozimo samo ono sta nam treba
-//console.log(pi); //pokazi ovo
+// //moze i ovo
+// import * as pin from './import_predavanja'; // sve iz modula, ovo nije optimizirano, 
+// //sa default exportom i named exports je bolje jel uvozimo samo ono sta nam treba
+// console.log(pi); //pokazi ovo
 
 
 // const doublePires = doublePi();
@@ -257,17 +259,56 @@ import Hooks from './5-hooks';
 ///// STATE IN REACT
 //4-state-inreacts.jsx
 
+// let myElement =
+// <>
+//  {/* <Hooks></Hooks> */}
+//  {/* <Events></Events> */}
+//  {/* <Forms></Forms> */}
+// </>
+
+
+/// NASTAVI OVDJE
+
+// var isDone = false; 
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// function handleClick() {
+//   console.log("Button clicked!"); // log to console when button is clicked
+//   isDone = !isDone; // toggle the value of isDone
+
+//   const myElement2 = 
+//     <div>
+//       <p style={{textDecoration: isDone ? "line-through" : "none"}}>parafsfsdfsdfsdf</p>
+//       <button onClick={handleClick}></button>
+//     </div>;
+
+//   root.render(myElement2);
+// }
+
+// const myElement = 
+//   <div>
+//     <p style={{textDecoration: isDone ? "line-through" : "none"}}>parafsfsdfsdfsdf</p>
+//     <button onClick={handleClick}></button>
+//   </div>;
+
+// // const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(myElement);
+
+import StatePractice from './4.1state.jsx'; // import the state practice component
+import Complex from './9-complex-states.jsx';
+import AddressForm from './9.2-complex-states-vjezba.jsx';
+
 let myElement =
 <>
- <Hooks></Hooks>
+  {/* <StatePractice></StatePractice> */}
+ {/* <Hooks></Hooks> */}
+ {/* <Events></Events> */}
+ {/* <Forms></Forms> */}
+ {/* <Complex></Complex> */}
+ <AddressForm></AddressForm>
 </>
 
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(myElement);
-
+root.render(myElement);
 
 
 
