@@ -296,6 +296,7 @@ import Forms from './7-Forms';
 import StatePractice from './4.1state.jsx'; // import the state practice component
 import Complex from './9-complex-states.jsx';
 import AddressForm from './9.2-complex-states-vjezba.jsx';
+import ColorBoxes from './10-spread-operator-vjezba.jsx';
 
 let myElement =
 <>
@@ -304,7 +305,8 @@ let myElement =
  {/* <Events></Events> */}
  {/* <Forms></Forms> */}
  {/* <Complex></Complex> */}
- <AddressForm></AddressForm>
+ {/* <AddressForm></AddressForm> */}
+ <ColorBoxes></ColorBoxes>
 </>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -18,6 +18,9 @@ const kontakti = contacts.map((contact) => {
 });
 
 
+
+
+
 const myElement = 
 <>
   {/* <h1>My Contacts</h1> */}

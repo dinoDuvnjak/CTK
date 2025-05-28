@@ -19,5 +19,5 @@ const myElementImperative =
     <button onClick={setParagraf}>Precrtaj text</button>
   </div>;
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(myElementImperative);
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(myElementImperative);
