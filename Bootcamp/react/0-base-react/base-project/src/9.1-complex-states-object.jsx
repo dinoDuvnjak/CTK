@@ -13,12 +13,12 @@ function Complex() {
     const { value, name } = event.target;
 
     /// SPREAD OPERATOR
-    // setAddress(prev => ({
-    //   // preslikamo sve ključeve iz prev
-    //   ...prev,
-    //   // pa prepišemo samo onaj koji se mijenja
-    //   [name]: value
-    // }));
+    setAddress(prev => ({
+      // preslikamo sve ključeve iz prev
+      ...prev,
+      // pa prepišemo samo onaj koji se mijenja
+      [name]: value
+    }));
 
     // set full name ima pristup do prethodne vrijednosti
     // prevValue je prethodna vrijednost fullName
