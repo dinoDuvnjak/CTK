@@ -6,8 +6,8 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
-import Login from './components/Login/Login';
-import Register from './components/Register';
+import Login from '../login/Login';
+import Register from '../register/Register';
 import StoreList from './components/StoreList';
 import ItemList from './components/ItemList';
 import StoreForm from './components/StoreForm';
