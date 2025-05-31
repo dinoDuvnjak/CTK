@@ -8,11 +8,11 @@ import {
 } from 'react-router-dom';
 import Login from '../login/Login';
 import Register from '../register/Register';
-import StoreList from './components/StoreList';
-import ItemList from './components/ItemList';
-import StoreForm from './components/StoreForm';
-import ItemForm from './components/ItemForm';
-import Layout from './components/Layout';
+import StoreList from '../store-list/StoreList';
+import ItemList from '../item-list/ItemList';
+import StoreForm from '../store-form/StoreForm';
+import ItemForm from '../item-form/ItemForm';
+import Layout from '../layout/Layout';
 
 type AuthHandler = (data: any) => void;
 
