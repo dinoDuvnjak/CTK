@@ -1,7 +1,7 @@
 // src/components/TagList.tsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ItemCard from './ItemCard';
+import ItemCard from '../item-card/ItemCard';
 
 type Tag = {
   id: number;

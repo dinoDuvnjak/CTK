@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../styles/main.scss'; // Import the custom SCSS
+import '../styles/main.scss';
+// Import the custom SCSS
 
 function Register({ onRegister }) {
   const [name, setName] = useState('');

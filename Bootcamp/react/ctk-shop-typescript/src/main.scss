@@ -1,0 +1,82 @@
+// src/styles/main.scss
+
+// Define a primary color variable (green/teal)
+$primary-teal: #4DB6AC;
+
+// Global resets and background
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: $primary-teal; // Green background for the entire body
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// Set the root container as a flex column for sticky footer
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Main area grows to fill available space
+main {
+  flex: 1;
+}
+
+// Custom hero style for pages (e.g. login, register, etc.)
+.hero.primary-hero {
+  background-color: $primary-teal;
+}
+
+.hero.is-fullheight.primary-hero {
+  min-height: 100vh;
+  width: 100%;
+}
+
+// Custom title style to ensure consistent typography
+.title.custom-title {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+// Updated card styling for a nicer look
+.card {
+  background-color: #222;  // Dark background for the card
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+// Optional: Add spacing utility class
+.mt-3 {
+  margin-top: 1rem;
+}
+
+// Footer styling (fixed at the bottom via flex layout)
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+// New classes for centering forms
+.centered-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adjust the height based on your header/footer heights */
+    min-height: calc(100vh - 120px);
+  }
+  
+  .form-wrapper {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1); // semi-transparent background
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }

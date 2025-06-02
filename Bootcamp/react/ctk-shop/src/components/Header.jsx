@@ -10,7 +10,7 @@ function Header() {
           My Store App
         </Link>
         <a
-          role="button"
+          role="button" 
           className="navbar-burger"
           aria-label="menu"
           aria-expanded="false"

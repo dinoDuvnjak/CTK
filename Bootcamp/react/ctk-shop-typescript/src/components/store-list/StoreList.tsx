@@ -1,7 +1,7 @@
 // src/components/StoreList.tsx
 import React, { useEffect, useState } from 'react';
-import { storesData } from '../data/dummyData';
-import StoreCard from './StoreCard';
+import { storesData } from '../../data/dummyData';
+import StoreCard from '../store-card/StoreCard';
 
 type Tag = {
   id: number;
