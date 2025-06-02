@@ -25,7 +25,7 @@ const db = new Client({
   user: "postgres",       // zamijenite prema vlastitoj konfiguraciji
   host: "localhost",
   database: "library",    // ime baze u kojoj je tablica 'knjige'
-  password: "yourPasswordHere", // zamijenite stvarnom lozinkom
+  password: "dduvnja6", // zamijenite stvarnom lozinkom
   port: 5432,
 });
 
