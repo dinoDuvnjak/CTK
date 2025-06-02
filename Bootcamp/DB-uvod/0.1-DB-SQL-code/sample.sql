@@ -1,222 +1,132 @@
--- Kreira tablicu 'friends' s novim značajkama
-CREATE TABLE friends (
-    -- id: automatski se numerira i jedinstven je (SERIAL PRIMARY KEY)
+-- Kreiranje tablice 'studenti'
+CREATE TABLE studenti (
+    -- id: automatski jedinstveni identifikator
     id SERIAL PRIMARY KEY,
     
-    -- name: koristi TEXT umjesto VARCHAR(50) – fleksibilnija pohrana imena
-    name TEXT,
+    -- ime i prezime studenta, obavezna polja
+    ime VARCHAR(50) NOT NULL,
+    prezime VARCHAR(50) NOT NULL,
     
-    -- age: pohranjuje cijele brojeve, a CHECK (age > 0) osigurava da dob ne može biti negativna
-    age INT CHECK (age > 0),
+    -- godina_rođenja: cijeli broj, ne može biti manj od 1900 ili veći od trenutne godine
+    godina_rođenja INT CHECK (godina_rođenja BETWEEN 1900 AND EXTRACT(YEAR FROM CURRENT_DATE)),
     
-    -- is_cool: pohranjuje true/false vrijednosti, DEFAULT false postavlja zadanu vrijednost na false
-    is_cool BOOLEAN DEFAULT false
+    -- email: opcionalno polje za e-mail adresu
+    email TEXT
 );
 
 
+-- ──────────────────────────────────────────────────────────
+-- 1. INSERT primjeri u tablici 'studenti'
+-- ──────────────────────────────────────────────────────────
 
--- Example SQL code for creating a table:
-CREATE TABLE products (
-  id INT NOT NULL,
-  name TEXT,
-  price MONEY,
-  PRIMARY KEY (id)
-);
+-- 1.a. Ispravno dodavanje prvog studenta (svi obavezni podaci)
+INSERT INTO studenti (ime, prezime, godina_rođenja, email)
+VALUES ('Ivan', 'Horvat', 2001, 'ivan.horvat@example.com');
 
--- Example of adding the first product:
-INSERT INTO products (id, name, price)
-VALUES (1, 'Pen', 1.20);
+-- 1.b. Dodavanje drugog studenta bez e-maila
+INSERT INTO studenti (ime, prezime, godina_rođenja)
+VALUES ('Ana', 'Kovač', 1999);
 
--- Example of adding the second product, but without a price:
-INSERT INTO products (id, name)
-VALUES (2, 'Pencil');
+-- 1.c. Dodavanje trećeg studenta, bez godine_rođenja (NULL je dozvoljeno jer polje nije NOT NULL)
+INSERT INTO studenti (ime, prezime, email)
+VALUES ('Marko', 'Perić', 'marko.peric@example.com');
 
--- Example of adding the third product, without an ID (THIS WILL CAUSE AN ERROR):
-INSERT INTO products (name, price)
-VALUES ('Eraser', 1.30);
+-- 1.d. Pokušaj dodavanja studenta bez prezimena (OVEĆI ĆE IZBACITI GREŠKU jer je prezime NOT NULL)
+INSERT INTO studenti (ime, godina_rođenja, email)
+VALUES ('Sara', 2002, 'sara.novak@example.com');
+-- ❌ ERROR:  null value in column "prezime" violates not-null constraint
 
--- Retrieve all products:
-SELECT * FROM products;
+-- 1.e. Pokušaj dodavanja studenta s nerealnom godinom_rođenja (OVEĆI ĆE IZBACITI GREŠKU zbog CHECK ograničenja)
+INSERT INTO studenti (ime, prezime, godina_rođenja)
+VALUES ('Luka', 'Marić', 1800);
+-- ❌ ERROR:  new row for relation "studenti" violates check constraint "studenti_godina_rođenja_check"
 
--- Retrieve only the product names and prices:
-SELECT name, price FROM products;
 
--- Filtering data:
-SELECT * FROM products WHERE id = 1;
-SELECT * FROM products WHERE price BETWEEN 1.00 AND 2.00;
-SELECT * FROM products WHERE name LIKE 'P%';
+-- ──────────────────────────────────────────────────────────
+-- 2. SELECT upiti nad tablicom 'studenti'
+-- ──────────────────────────────────────────────────────────
 
--- Updating data:
-UPDATE table_name  
-SET column_name = new_value  
-WHERE condition;
+-- 2.a. Dohvati sve studente
+SELECT * FROM studenti;
 
--- Updating multiple columns at once:
-UPDATE products  
-SET name = 'Premium Pen', price = 2.00  
-WHERE id = 1;
+-- 2.b. Dohvati samo imena i prezimena svih studenata
+SELECT ime, prezime FROM studenti;
 
--- Deleting data:
-DELETE FROM products  
+-- 2.c. Dohvati studente rođene nakon 2000. godine
+SELECT * 
+FROM studenti 
+WHERE godina_rođenja > 2000;
+
+-- 2.d. Dohvati studente čije ime počinje na 'A' (koristi LIKE)
+SELECT * 
+FROM studenti 
+WHERE ime LIKE 'A%';
+
+-- 2.e. Dohvati studente i sortiraj ih po prezimenu uzlazno
+SELECT * 
+FROM studenti 
+ORDER BY prezime ASC;
+
+
+-- ──────────────────────────────────────────────────────────
+-- 3. UPDATE upiti nad tablicom 'studenti'
+-- ──────────────────────────────────────────────────────────
+
+-- 3.a. Ažuriraj e-mail studenta s id = 2
+UPDATE studenti
+SET email = 'ana.kovac@studenti.hr'
 WHERE id = 2;
 
--- SQL Relationships and JOINs:
--- (Adding a product with an extra column 'stock' for later use)
-INSERT INTO products (id, name, price, stock)
-VALUES (2, 'Pencil', 0.8, 12);
+-- 3.b. Promijeni ime i prezime studenta kojem je trenutno ime 'Marko'
+UPDATE studenti
+SET ime = 'Marin', prezime = 'Perić'
+WHERE ime = 'Marko';
 
-CREATE TABLE orders (
-    id INT NOT NULL,         -- Unique order identifier (Primary Key).
-    order_number INT,        -- Order number.
-    customer_id INT,         -- Customer ID (Foreign Key that references the 'customers' table).
-    product_id INT,          -- Product ID (Foreign Key that references the 'products' table).
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES customers(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
--- Adding the first order:
-INSERT INTO orders (id, order_number, customer_id, product_id)
-VALUES (1, 4362, 2, 1);
-
--- Inner join: joining orders with customers:
-SELECT orders.order_number, customers.first_name, customers.last_name, customers.address
-FROM orders
-INNER JOIN customers ON orders.customer_id = customers.id;
-
--- Inner join: joining orders with products (exercise 1):
-SELECT orders.order_number, products.name, products.price, products.stock
-FROM orders
-INNER JOIN products ON orders.product_id = products.id;
-
--- Inner join: joining orders with both customers and products (exercise 2):
-SELECT orders.order_number, customers.first_name, customers.last_name, products.name, products.price
-FROM orders
-INNER JOIN customers ON orders.customer_id = customers.id
-INNER JOIN products ON orders.product_id = products.id;
+-- 3.c. Povećaj godinu_rođenja svakog studenta koji je rođen prije 2000. za 1 godinu (aritmetički izraz)
+UPDATE studenti
+SET godina_rođenja = godina_rođenja + 1
+WHERE godina_rođenja < 2000;
 
 
---  1:1
-CREATE TABLE studenti (
-    id SERIAL PRIMARY KEY,
-    ime VARCHAR(50),
-    prezime VARCHAR(50)
-);
+-- ──────────────────────────────────────────────────────────
+-- 4. DELETE upiti nad tablicom 'studenti'
+-- ──────────────────────────────────────────────────────────
 
-CREATE TABLE kontakti (
-    id INT UNIQUE REFERENCES studenti(id),
-    telefon VARCHAR(20),
-    adresa VARCHAR(100)
-);
+-- 4.a. Obriši studenta s id = 3
+DELETE FROM studenti
+WHERE id = 3;
 
-INSERT INTO studenti (ime, prezime) VALUES ('Marko', 'Marić');
-INSERT INTO kontakti (id, telefon, adresa) VALUES (1, '0911234567', 'Ulica 123, Zagreb');
-
-SELECT * FROM studenti 
-INNER JOIN kontakti ON studenti.id = kontakti.id;
-
--- 1:M
-CREATE TABLE studenti (
-    id SERIAL PRIMARY KEY,
-    ime VARCHAR(50),
-    prezime VARCHAR(50)
-);
-
-CREATE TABLE zadace (
-    id SERIAL PRIMARY KEY,
-    ocjena INT,
-    student_id INT REFERENCES studenti(id)
-);
-
-INSERT INTO studenti (ime, prezime) VALUES 
-('Marko', 'Marić'),
-('Ana', 'Anić');
-
-INSERT INTO zadace (ocjena, student_id) VALUES 
-(5, 1),  -- Marko je dobio 5
-(4, 1),  -- Marko je dobio 4
-(3, 2);  -- Ana je dobila 3
-
-SELECT studenti.ime, studenti.prezime, zadace.ocjena 
-FROM studenti 
-INNER JOIN zadace ON studenti.id = zadace.student_id;
-
-SELECT studenti.ime, studenti.prezime, zadace.ocjena 
-FROM studenti 
-INNER JOIN zadace ON studenti.id = zadace.student_id
-WHERE studenti.ime = 'Marko' AND studenti.prezime = 'Marić';
-
--- m:m
-CREATE TABLE studenti (
-    id SERIAL PRIMARY KEY,
-    ime VARCHAR(50),
-    prezime VARCHAR(50)
-);
-
-CREATE TABLE predmeti (
-    id SERIAL PRIMARY KEY,
-    naziv VARCHAR(50)
-);
-
-CREATE TABLE upisi (
-    student_id INT REFERENCES studenti(id),
-    predmet_id INT REFERENCES predmeti(id),
-    PRIMARY KEY (student_id, predmet_id)
-);
-
-INSERT INTO studenti (ime, prezime) VALUES 
-('Marko', 'Marić'),
-('Ana', 'Anić');
-
-INSERT INTO predmeti (naziv) VALUES 
-('Matematika'),
-('Fizika'),
-('Engleski');
-
-INSERT INTO upisi (student_id, predmet_id) VALUES 
-(1, 1),  -- Marko je upisan na Matematiku
-(1, 2),  -- Marko je upisan na Fiziku
-(2, 2),  -- Ana je upisana na Fiziku
-(2, 3);  -- Ana je upisana na Engleski
-
---- ALTER TABLE ----
-
--- Preimenuje tablicu studenti u korisnici
-ALTER TABLE studenti RENAME TO korisnici;
-
--- Dodavanje novog stupca
-ALTER TABLE studenti ADD COLUMN email TEXT;
-
--- Promjena tipa stupca
-ALTER TABLE studenti ALTER COLUMN email TYPE VARCHAR(100);
-
--- Brisanje tablice
-DROP TABLE IF EXISTS studenti;
-
--- Postavlja ime korisnika s id = 1 na "Angelina".
-UPDATE korisnici SET ime = 'Angelina' WHERE id = 1;
-
--- Povećavanje ocjene svim studentima
-UPDATE studenti SET ocjena = ocjena + 1 WHERE ocjena < 5;
-
--- Brisanje korisnika s id = 3
-DELETE FROM korisnici WHERE id = 3;
-
--- Brisanje svih studenata s ocjenom manjom od 2
-DELETE FROM studenti WHERE ocjena < 2;
-
--- OPREZ! Briše sve korisnike!
-DELETE FROM korisnici;  -- Briše sve korisnike!
-
--- Prikazuje sve korisnike sortirane po imenu u uzlaznom redoslijedu
-SELECT * FROM korisnici ORDER BY ime ASC;
-
--- Prikazuje sve korisnike sortirane po prezimenu u silaznom redoslijedu
-SELECT * FROM korisnici ORDER BY prezime DESC;
+-- 4.b. Obriši sve studente rođene prije 1990. godine
+DELETE FROM studenti
+WHERE godina_rođenja < 1990;
 
 
+-- ──────────────────────────────────────────────────────────
+-- 5. Dodatan primjer: ALTER TABLE i daljnje manipulacije
+-- ──────────────────────────────────────────────────────────
+
+-- 5.a. Dodavanje novog stupca 'broj_indexa'
+ALTER TABLE studenti
+ADD COLUMN broj_indexa VARCHAR(20);
+
+-- 5.b. Ažuriraj broj_indexa svim postojećim studentima
+UPDATE studenti
+SET broj_indexa = 'SI-2025-' || id::TEXT;
+
+-- 5.c. Dohvati sve studente s novim stupcem
+SELECT * FROM studenti;
+
+-- 5.d. Brisanje stupca 'email'
+ALTER TABLE studenti
+DROP COLUMN email;
 
 
-
-
-
+-- ──────────────────────────────────────────────────────────
+-- Kratki opisni zadatak za studente:
+-- 1. Kreirajte tablicu 'studenti' u PostgreSQL pomoću gornje CREATE naredbe.
+-- 2. Izvršite INSERT primjere 1.a – 1.e i zabilježite koje su greške dobivene.
+-- 3. Pokrenite SELECT upite iz dijela 2 i promatrajte rezultate.
+-- 4. Izmijenite neke vrijednosti pomoću UPDATE primjera 3.a – 3.c.
+-- 5. Obrišite nekoliko studenata prema uputama iz dijela 4.
+-- 6. Dodajte stupac 'broj_indexa', ažurirajte ga i zatim ga izbrišite poput 5.a – 5.d.
+-- 7. Dokumentirajte kratko svaki korak i poruke pogrešaka (ako ih bude).
