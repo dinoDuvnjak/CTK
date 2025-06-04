@@ -37,6 +37,11 @@ VALUES
 ON CONFLICT DO NOTHING; 
 -- Napomena: Ako već postoje studenti s tim ID-evima, nećemo duplirati.
 
+
+-- preimenuj tablicu 'studenti' ako već postoji
+ALTER TABLE IF EXISTS studenti
+  RENAME TO studenti1;
+
 -- =========================================================================
 -- 2) ALTER TABLE: Dodavanje novog stupca 'smjer' sa ZADANOM vrijednošću
 -- =========================================================================
@@ -48,6 +53,11 @@ ALTER TABLE studenti
 -- (Opcionalno) Provjerite da je stupac dodan i da postojeće retke imaju vrijednost 'Nepoznato':
 -- SELECT id, ime, prezime, smjer FROM studenti LIMIT 5;
 
+
+
+-- promjena tipa stupca 'godina_rođenja' na 'godina_rođenja' INT
+ALTER TABLE studenti
+  ALTER COLUMN godina_rođenja TYPE INT;
 
 -- =========================================================================
 -- 3) UPDATE: Ažuriranje e-maila studenta s ID-em 2
@@ -91,3 +101,7 @@ ORDER BY prezime ASC;
 -- ===================================================================
 -- Kraj skripta
 -- ===================================================================
+
+
+-- DROP TABLE studenti; -- Ova linija se koristi za brisanje tablice 'studenti' ako je potrebno
+DROP TABLE IF EXISTS studenti;

@@ -67,6 +67,8 @@ app.get("/studenti", async (req, res) => {
     console.error("Error executing SELECT * FROM studenti:", err.stack);
     res.status(500).json({ error: err.message });
   }
+  // Nemojte koristiti db.end() ovdje jer bi to zatvorilo vezu s bazom
+  // i onemogućilo obradu svih budućih zahtjeva
 });
 
 /**

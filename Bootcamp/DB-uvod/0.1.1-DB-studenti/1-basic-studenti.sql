@@ -1,7 +1,30 @@
+
+-- PostgreSQL nudi širi raspon tipova podataka u odnosu na standardni SQL.
+-- 🔹 Tekstualni podaci:
+-- VARCHAR(n) – Varijabilna duljina teksta (maksimalno n - ali iskoristeno je memorije Koliko ima znakova znakova)- 
+-- CHAR(50) -fiksira memoriju na vrijednost koja je unesena
+-- TEXT – Neograničena duljina teksta, malo je sporiji ali nije strasno
+-- 🔹 Brojevi:
+-- INT – Cijeli brojevi
+-- BIGINT – Veliki cijeli brojevi (za milijarde zapisa)
+-- DECIMAL(10,2) – Decimalni brojevi (npr. cijene)
+-- 🔹 Datum i vrijeme:
+-- DATE – Pohranjuje samo datum
+-- TIMESTAMP – Pohranjuje datum i vrijeme
+-- 🔹 Ostalo:
+-- BOOLEAN – true / false vrijednosti
+-- SERIAL – Auto-incrementing broj za primarne ključeve
+-- 📌 Koji format koristiti za tekst?
+-- VARCHAR(50) = ograničenje na 50 znakova, - TEXT = nema ograničenja
+
+
+
+
+
 -- Kreiranje tablice 'studenti'
 CREATE TABLE studenti (
     -- id: automatski jedinstveni identifikator
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY NOT NULL,
     
     -- ime i prezime studenta, obavezna polja
     ime VARCHAR(50) NOT NULL,
@@ -21,6 +44,10 @@ CREATE TABLE studenti (
 
 -- 1.a. Ispravno dodavanje prvog studenta (svi obavezni podaci)
 INSERT INTO studenti (ime, prezime, godina_rođenja, email)
+VALUES ('Ivan', 'Horvat', 2001, 'ivan.horvat@example.com');
+
+-- ekvivalen 
+INSERT INTO studenti
 VALUES ('Ivan', 'Horvat', 2001, 'ivan.horvat@example.com');
 
 -- 1.b. Dodavanje drugog studenta bez e-maila
@@ -67,6 +94,8 @@ SELECT *
 FROM studenti 
 ORDER BY prezime ASC;
 
+-- desending
+
 
 -- ──────────────────────────────────────────────────────────
 -- 3. UPDATE upiti nad tablicom 'studenti'
@@ -76,6 +105,10 @@ ORDER BY prezime ASC;
 UPDATE studenti
 SET email = 'ana.kovac@studenti.hr'
 WHERE id = 2;
+
+-- jako opasno ako nema WHERE uvjeta, promijenit će sve retke
+UPDATE studenti
+SET email = 'ana.kovac@studenti.hr'
 
 -- 3.b. Promijeni ime i prezime studenta kojem je trenutno ime 'Marko'
 UPDATE studenti

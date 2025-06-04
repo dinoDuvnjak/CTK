@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS studenti (
 --    Polje 'student_id' je vanjski ključ na 'studenti(id)' i mora biti UNIQUE,
 --    tako da svaki student može imati najviše jedan redak u ovoj tablici.
 CREATE TABLE IF NOT EXISTS adrese_studenata (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY NOT NULL,
     student_id INT NOT NULL
       REFERENCES studenti(id)
       ON DELETE CASCADE,
@@ -25,6 +25,20 @@ CREATE TABLE IF NOT EXISTS adrese_studenata (
     grad VARCHAR(50) NOT NULL,
     posta INT CHECK (posta BETWEEN 10000 AND 99999),
     UNIQUE (student_id)
+);
+
+-- ekvivalentno
+CREATE TABLE IF NOT EXISTS adrese_studenata (
+  id SERIAL PRIMARY KEY,
+  student_id INT NOT NULL,
+  ulica VARCHAR(100) NOT NULL,
+  grad VARCHAR(50) NOT NULL,
+  posta INT CHECK (posta BETWEEN 10000 AND 99999),
+  UNIQUE (student_id),
+  CONSTRAINT fk_adrese_student
+    FOREIGN KEY (student_id)
+    REFERENCES studenti(id)
+    ON DELETE CASCADE
 );
 
 -- ===================================================================
@@ -53,8 +67,11 @@ ON CONFLICT DO NOTHING;
 -- ===================================================================
 -- 4) INNER JOIN: dohvat studenata koji imaju adresu
 -- ===================================================================
+-- Vraća samo one retke (redove) iz obje tablice za koje postoji podudarajući zapis u povezanoj koloni.
+
+-- Ako u tablici A postoji red, ali u tablici B nema odgovarajućeg retka, taj red neće biti uključen u rezultat
 SELECT
-  s.id           AS student_id,
+  s.id           AS student_id, -- ovo ce renejmovati s.id u student_id kada dobijemo nazad tablicu
   s.ime,
   s.prezime,
   s.godina_rođenja,
@@ -73,10 +90,39 @@ ORDER BY s.id;
 --   student_id = 4 (Sara Novak)
 -- Student s student_id = 3 (Marko Perić) neće se pojaviti, jer nema adresu u 'adrese_studenata'.
 
+
+-- with AS:
+SELECT
+  s.id           AS student_id,
+  s.ime          AS ime,
+  s.prezime      AS prezime
+FROM studenti AS s
+
+-- without AS:
+SELECT
+  s.id           student_id, -- equivalentno bez as ali preporucam da se koristi.
+  s.ime          ime,
+  s.prezime      prezime
+FROM studenti s
+
+In both cases:
+
+-- studenti AS s (or studenti s) tells PostgreSQL “refer to the table studenti by the short name s in the rest of this query.”
+
+-- s.id AS student_id (or s.id student_id) tells PostgreSQL “show the column s.id under the heading student_id in the result set.”
+
+-- Using AS can make it clearer that you’re assigning an alias, but PostgreSQL (and most other SQL dialects) let you drop it.
+
+
+
 -- ===================================================================
 -- 5) (Opcionalno) LEFT JOIN: dohvat svih studenata + eventualne adrese
 -- ===================================================================
 -- Studenti bez adrese će imati NULL vrijednosti za polja u tablici 'adrese_studenata'.
+
+-- Vraća samo one retke (redove) iz obje tablice za koje postoji podudarajući zapis u povezanoj koloni.
+
+-- Ako u tablici A postoji red, ali u tablici B nema odgovarajućeg retka, taj red neće biti uključen u rezultat
 SELECT
   s.id           AS student_id,
   s.ime,
