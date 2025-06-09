@@ -122,6 +122,7 @@ app.post("/studenti", async (req, res) => {
   }
 });
 
+
 /**
  * PUT /studenti/:id
  * Ažuriraj postojećeg studenta
@@ -134,54 +135,38 @@ app.post("/studenti", async (req, res) => {
  * }
  */
 app.put("/studenti/:id", async (req, res) => {
-  const { id } = req.params;
+  // 1. Uzmemo id iz URL-a i polja iz JSON body-ja
+  const id = req.params.id;
   const { ime, prezime, godina_rođenja, email } = req.body;
 
-  // Dinamički sastavljamo UPDATE naredbu na temelju poslanih polja
-  const fields = [];
-  const values = [];
-  let idx = 1;
-
-  if (ime !== undefined) {
-    fields.push(`ime = $${idx++}`);
-    values.push(ime);
-  }
-  if (prezime !== undefined) {
-    fields.push(`prezime = $${idx++}`);
-    values.push(prezime);
-  }
-  if (godina_rođenja !== undefined) {
-    fields.push(`godina_rođenja = $${idx++}`);
-    values.push(godina_rođenja);
-  }
-  if (email !== undefined) {
-    fields.push(`email = $${idx++}`);
-    values.push(email);
-  }
-
-  if (fields.length === 0) {
-    return res.status(400).json({ error: "Nema polja za ažuriranje." });
-  }
-
-  // Dodajemo id na kraj values
-  values.push(id);
-
+  // 2. Napravimo SQL UPDATE s fiksnim setom polja
+  //    Ovdje očekujemo da klijent pošalje SVA polja koja želi ažurirati.
   const query = `
     UPDATE studenti
-    SET ${fields.join(", ")}
-    WHERE id = $${idx}
-    RETURNING *
+    SET ime = $1,
+        prezime = $2,
+        godina_rođenja = $3,
+        email = $4
+    WHERE id = $5
+    RETURNING *;
   `;
+  const values = [ime, prezime, godina_rođenja, email, id];
 
   try {
+    // 3. Izvršimo upit
     const result = await db.query(query, values);
+
+    // 4. Ako nema pronađenih redova, dokažemo da studenta nema
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: "Student nije pronađen za ažuriranje." });
+      return res.status(404).json({ error: "Student nije pronađen." });
     }
+
+    // 5. Vratimo ažurirani red
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(`Error executing UPDATE studenti id=${id}:`, err.stack);
-    res.status(400).json({ error: err.message });
+    // 6. U slučaju SQL greške, javimo klijentu
+    console.error("Greška pri ažuriranju studenta:", err);
+    res.status(500).json({ error: "Došlo je do greške na serveru." });
   }
 });
 
