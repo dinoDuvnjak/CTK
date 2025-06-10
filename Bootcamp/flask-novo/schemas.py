@@ -6,6 +6,8 @@ class ItemSchema(Schema):
     name = fields.Str(required=True)
     price = fields.Float(required=True)
     store_id = fields.Str(required=True)
+    #store_id = fields.Int(required=True) u 7 postaje int
+ 
 
 
 class ItemUpdateSchema(Schema):
