@@ -15,13 +15,14 @@ CREATE TABLE IF NOT EXISTS studenti (
 -- 2) Kreiramo tablicu 'ispiti' (svaki student može polagati više ispita – 1:M relacija)
 --    Polje 'student_id' je vanjski ključ koji upućuje na 'studenti(id)'.
 --    ON DELETE CASCADE osigurava da se svi ispiti obrišu ako se obriše student.
+-- REFERENCE je foreign key koji povezuje 'ispiti.student_id' s 'studenti.id'.
 CREATE TABLE IF NOT EXISTS ispiti (
     id SERIAL PRIMARY KEY,
     predmet VARCHAR(100) NOT NULL,
     ocjena INT CHECK (ocjena BETWEEN 1 AND 5),
     datum_ispita DATE NOT NULL DEFAULT CURRENT_DATE,
     student_id INT NOT NULL
-        REFERENCES studenti(id)
+        REFERENCES studenti(id) 
         ON DELETE CASCADE
 );
 

@@ -100,7 +100,7 @@ FROM studenti AS s
 
 -- without AS:
 SELECT
-  s.id           student_id, -- equivalentno bez as ali preporucam da se koristi.
+  s.id           student_id, -- equivalentno bez as ali preporucam da se koristi
   s.ime          ime,
   s.prezime      prezime
 FROM studenti s
