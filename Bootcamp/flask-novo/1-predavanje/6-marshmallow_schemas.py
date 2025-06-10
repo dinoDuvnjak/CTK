@@ -1,4 +1,5 @@
 # kako namjesitti validaciju podataka u Flask aplikaciji koristeći Marshmallow
+# https://diff-store.com/diff/05_flask_smorest__08_validation_with_marshmallow
 
 # 1- dodati dependenciju marshmallow u requirements.txt
 # 2- kreiraj schemas.py datoteku

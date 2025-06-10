@@ -2,7 +2,9 @@
 
 #1- napravi folder resources tamo prebaci item.py i store.py
 
+
 #ovo postaje app.py
+# poslije ovoga pokazi swagger ui http://127.0.0.1:5000/swagger-ui
 
 from flask import Flask
 from flask_smorest import Api

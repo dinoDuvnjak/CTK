@@ -20,7 +20,7 @@ app = Flask(__name__)
 @app.get("/item/<string:item_id>")
 def get_item(item_id):
     try:
-        return jsonify(items[item_id])
+        return jsonify(items[item_id]) # jsonify pretvara dict u JSON format
     except KeyError:
         return jsonify({"message": "Item not found"}), 404 #ako radimo ovako nece se pojaviti u Swaggeru, moramo koristiti jsonify
 

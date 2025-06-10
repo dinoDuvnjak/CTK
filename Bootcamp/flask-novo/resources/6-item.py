@@ -3,7 +3,10 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 
 from schemas import ItemSchema, ItemUpdateSchema
+
+# predavanje 8 , ovo brisemo
 from db import items
+
 
 blp = Blueprint("Items", "items", description="Operations on items")
 
@@ -25,7 +28,7 @@ class Item(MethodView):
             abort(404, message="Item not found.")
 
     @blp.arguments(ItemUpdateSchema)
-    @blp.response(200, ItemSchema) # vazno je da budu ispod argumenata
+    @blp.response(200, ItemSchema) # vazno je da budu ispod argumenata response ispod arguments
     def put(self, item_data, item_id):
         try:
             item = items[item_id]
@@ -59,3 +62,21 @@ class ItemList(MethodView):
         items[item_id] = item
 
         return item
+    
+ ########   # predavanje 8, ovo postaje post metoda,#######
+    # from models import ItemModel
+    # ne trebamo validaciju jel imamo u db postavke unique i not null, tako da ne moramo provjeravati
+
+    #  def post(self, item_data):
+    #     item = ItemModel(**item_data)
+
+    #     try:
+    #         db.session.add(item)
+    #         db.session.commit()
+    #     except SQLAlchemyError:
+    #         abort(500, message="An error occurred while inserting the item.")
+
+    #     return item
+    
+
+    
