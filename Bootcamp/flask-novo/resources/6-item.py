@@ -65,6 +65,7 @@ class ItemList(MethodView):
     
  ########   # predavanje 8, ovo postaje post metoda,#######
     # from models import ItemModel
+    # from sqlalchemy.exc import SQLAlchemyError
     # ne trebamo validaciju jel imamo u db postavke unique i not null, tako da ne moramo provjeravati
 
     #  def post(self, item_data):
@@ -72,7 +73,7 @@ class ItemList(MethodView):
 
     #     try:
     #         db.session.add(item)
-    #         db.session.commit()
+    #         db.session.commit() # this saves the item to the database
     #     except SQLAlchemyError:
     #         abort(500, message="An error occurred while inserting the item.")
 

@@ -34,7 +34,7 @@ class Item(MethodView):
                 message="Bad request. Ensure 'price', and 'name' are included in the JSON payload.",
             )
         try:
-            item = items[item_id]
+            item = items[item_id]# why this?  
 
             # https://blog.teclado.com/python-dictionary-merge-update-operators/
             item |= item_data

@@ -22,3 +22,7 @@ class ItemModel(db.Model):
     name = db.Column(db.String(80), unique=False, nullable=False)
     price = db.Column(db.Float(precision=2), unique=False, nullable=False)
     store_id = db.Column(db.Integer, unique=False, nullable=False)
+    # u 8 predavananju one to many ovako modificiraj
+    # store_id = db.Column(db.Integer, db.ForeignKey("stores.id"), unique=False, nullable=False) # 
+    # sa db.relationship() mozemo povezati store_id sa StoreModel i tako povezati item sa store-om
+    store = db.relationship("StoreModel", back_populates="items")

@@ -51,6 +51,55 @@ db.connect()
  *   ...
  * ]
  */
+
+app.get("/stores", async (req, res) => {
+  try {
+    // dohvatimo trgovine + artikle u jednom result setu
+    const sql = `
+      SELECT
+        s.id   AS store_id,
+        s.name AS store_name,
+        i.id   AS item_id,
+        i.name AS item_name,
+        i.price
+      FROM stores s
+      LEFT JOIN items i
+        ON i.store_id = s.id
+      ORDER BY s.id, i.id
+    `;
+    const { rows } = await db.query(sql);
+
+    // grupiramo redove prema store_id
+    const storesMap = new Map();
+    for (let row of rows) {
+      // ako prvi put vidimo ovu trgovinu, inicijaliziramo objekt
+      if (!storesMap.has(row.store_id)) {
+        storesMap.set(row.store_id, {
+          id:    row.store_id,
+          name:  row.store_name,
+          items: []
+        });
+      }
+      // ako postoji artikl (LEFT JOIN može vratiti null za i.id)
+      if (row.item_id !== null) {
+        storesMap.get(row.store_id).items.push({
+          id:    row.item_id,
+          name:  row.item_name,
+          price: row.price
+        });
+      }
+    }
+
+    // pretvorimo Map u običan niz objekata
+    const stores = Array.from(storesMap.values());
+    res.json(stores);
+
+  } catch (err) {
+    console.error("Error fetching stores:", err.stack);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get("/stores", async (req, res) => {
   try {
     // Prvo dohvatimo sve trgovine

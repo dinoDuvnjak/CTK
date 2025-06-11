@@ -25,7 +25,7 @@ def create_app(db_url=None): # db_url je opcionalan parametar koji mozemo korist
     #ovdje mozemo postaviti URL baze podataka, ako nije postavljen, koristi SQLite bazu
     # ako zelimo koristiti postgres bazu, onda trebamo postaviti db_url na npr. "postgresql://user:password@localhost/dbname"
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or "sqlite:///data.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # da ne bi bilo warninga u konzoli
     app.config["PROPAGATE_EXCEPTIONS"] = True
     db.init_app(app)
     api = Api(app)
