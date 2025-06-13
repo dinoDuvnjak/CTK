@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+__init__.py
+
+Bootcamp/flask/models/__pycache__/  
+Bootcamp/flask/resources/__pycache__/

@@ -14,3 +14,4 @@
 # sqlalchemy setup - https://diff-store.com/diff/06_sql_storage_sqlalchemy__03_one_to_many_relationships_sqlalchemy
 # insert into - https://diff-store.com/diff/06_sql_storage_sqlalchemy__05_insert_models_sqlalchemy
 #get from db - https://diff-store.com/diff/06_sql_storage_sqlalchemy__06_get_models_or_404
+# put https://diff-store.com/diff/06_sql_storage_sqlalchemy__07_updating_models_sqlalchemy

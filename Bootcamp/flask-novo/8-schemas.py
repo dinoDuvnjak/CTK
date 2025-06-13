@@ -17,6 +17,8 @@ class PlainStoreSchema(Schema):
 class ItemUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Float()
+    # 8 - predavanje, dodajemo store id koji nije obavezan, jer ga ne moramo slati prilikom update-a, ali mozemo
+    #store_id = fields.Str(required=False)  # store_id nije obavezan prilikom update-a, ali ga mozemo slati
 
 class ItemSchema(PlainItemSchema):
     store_id = fields.Str(required=True)  # store_id ostaje kao obavezan field
