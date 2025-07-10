@@ -1,83 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduHence Classroom Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftEase - DIY Workshop Management</title>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <h1>EduHence Classroom Management</h1>
+        <h1>CraftEase Workshop Management</h1>
+        <p>Your complete DIY workshop and project management solution</p>
     </header>
 
-    <!-- Navigation Section -->
     <nav>
         <ul>
             <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#students">Students</a></li>
-            <li><a href="#classes">Classes</a></li>
-            <li><a href="#reports">Reports</a></li>
-            <li><a href="#settings">Settings</a></li>
+            <li><a href="#workshops">Workshops</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#customers">Customers</a></li>
+            <li><a href="#analytics">Analytics</a></li>
         </ul>
     </nav>
 
-    <!-- Main Content Section -->
     <main>
-        <!-- Form to Add a New Student -->
-        <section id="students">
-            <h2>Add New Student</h2>
+        <section id="workshop-registration">
+            <h2>Register New Workshop Participant</h2>
             <form>
-                <label for="student-name">Name:</label>
-                <input type="text" id="student-name" name="student-name" required /><br>
+                <label for="participant-name">Participant Name:</label>
+                <input type="text" id="participant-name" name="participant-name" required>
 
-                <label for="student-age">Age:</label>
-                <input type="number" id="student-age" name="student-age" required /><br>
+                <label for="participant-age">Age:</label>
+                <input type="number" id="participant-age" name="participant-age" min="16" max="99" required>
 
-                <label for="class">Class:</label>
-                <input type="text" id="class" name="class" required /><br>
+                <label for="workshop-type">Workshop Type:</label>
+                <select id="workshop-type" name="workshop-type" required>
+                    <option value="">Select Workshop</option>
+                    <option value="basic-woodworking">Basic Woodworking</option>
+                    <option value="home-electrical">Home Electrical Basics</option>
+                    <option value="plumbing-essentials">Plumbing Essentials</option>
+                    <option value="tile-installation">Tile Installation</option>
+                    <option value="painting-techniques">Painting Techniques</option>
+                </select>
 
-                <label for="parent-contact">Parent Contact:</label>
-                <input type="text" id="parent-contact" name="parent-contact" required /><br>
+                <label for="skill-level">Skill Level:</label>
+                <select id="skill-level" name="skill-level" required>
+                    <option value="">Select Level</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
 
-                <button type="submit">Add Student</button>
+                <label for="contact-info">Contact Information:</label>
+                <input type="email" id="contact-info" name="contact-info" placeholder="email@example.com" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+
+                <label for="project-interest">Project Interest:</label>
+                <textarea id="project-interest" name="project-interest" placeholder="What DIY project are you most interested in learning about?" rows="3"></textarea>
+
+                <button type="submit">Register for Workshop</button>
             </form>
         </section>
 
-        <!-- Table to Display Students -->
-        <section>
-            <h2>Student List</h2>
-            <table border="1">
+        <section id="participant-list">
+            <h2>Workshop Participants</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Age</th>
-                        <th>Class</th>
-                        <th>Parent Contact</th>
+                        <th>Workshop</th>
+                        <th>Skill Level</th>
+                        <th>Contact</th>
+                        <th>Registration Date</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Example Data -->
                     <tr>
-                        <td>Emily Johnson</td>
-                        <td>12</td>
-                        <td>6A</td>
-                        <td>+1234567890</td>
+                        <td>Sarah Martinez</td>
+                        <td>28</td>
+                        <td>Basic Woodworking</td>
+                        <td>Beginner</td>
+                        <td>sarah.martinez@email.com</td>
+                        <td>2024-03-15</td>
+                        <td>Confirmed</td>
                     </tr>
                     <tr>
-                        <td>Michael Brown</td>
-                        <td>14</td>
-                        <td>8B</td>
-                        <td>+1234567891</td>
+                        <td>Mike Johnson</td>
+                        <td>35</td>
+                        <td>Home Electrical</td>
+                        <td>Intermediate</td>
+                        <td>mike.johnson@email.com</td>
+                        <td>2024-03-14</td>
+                        <td>Confirmed</td>
+                    </tr>
+                    <tr>
+                        <td>Lisa Chen</td>
+                        <td>42</td>
+                        <td>Tile Installation</td>
+                        <td>Advanced</td>
+                        <td>lisa.chen@email.com</td>
+                        <td>2024-03-13</td>
+                        <td>Waitlist</td>
+                    </tr>
+                    <tr>
+                        <td>David Rodriguez</td>
+                        <td>31</td>
+                        <td>Plumbing Essentials</td>
+                        <td>Beginner</td>
+                        <td>david.rodriguez@email.com</td>
+                        <td>2024-03-12</td>
+                        <td>Confirmed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="upcoming-workshops">
+            <h2>Upcoming Workshops</h2>
+            <div class="workshop-grid">
+                <div class="workshop-card">
+                    <h3>Basic Woodworking</h3>
+                    <p><strong>Date:</strong> March 25, 2024</p>
+                    <p><strong>Time:</strong> 10:00 AM - 2:00 PM</p>
+                    <p><strong>Instructor:</strong> Tom Wilson</p>
+                    <p><strong>Spots Available:</strong> 3/12</p>
+                    <p><strong>Materials Included:</strong> Wood, screws, sandpaper, finish</p>
+                </div>
+                
+                <div class="workshop-card">
+                    <h3>Home Electrical Basics</h3>
+                    <p><strong>Date:</strong> March 28, 2024</p>
+                    <p><strong>Time:</strong> 6:00 PM - 9:00 PM</p>
+                    <p><strong>Instructor:</strong> Jennifer Adams</p>
+                    <p><strong>Spots Available:</strong> 7/15</p>
+                    <p><strong>Materials Included:</strong> Wire, outlets, switches, tools</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tool-inventory">
+            <h2>Tool & Material Availability</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>In Stock</th>
+                        <th>Reserved</th>
+                        <th>Available</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Circular Saw</td>
+                        <td>Power Tools</td>
+                        <td>8</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>Drill Set</td>
+                        <td>Power Tools</td>
+                        <td>12</td>
+                        <td>8</td>
+                        <td>4</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>Tile Spacers</td>
+                        <td>Hardware</td>
+                        <td>150</td>
+                        <td>25</td>
+                        <td>125</td>
+                        <td>Available</td>
+                    </tr>
+                    <tr>
+                        <td>Multimeter</td>
+                        <td>Electrical</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>Low Stock</td>
                     </tr>
                 </tbody>
             </table>
         </section>
     </main>
 
-    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 EduHence. All rights reserved.</p>
+        <p>&copy; 2024 CraftEase. All rights reserved.</p>
+        <p>Empowering DIY enthusiasts and home improvement retailers</p>
+        <p>Contact: support@craftease.com | (555) 123-CRAFT</p>
     </footer>
 </body>
 </html>
